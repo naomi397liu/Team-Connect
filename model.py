@@ -11,17 +11,17 @@ class User(db.Model):
     username = db.Column(db.String, unique=True)
     password = db.Column(db.String)
     bio = db.Column(db.String)
-    availability_id = db.Column(db.datetime) #instead of another table
+    availability = db.Column(db.DateTime) #instead of another table
     
-    sports_id = db.Column(db.Integer, db.ForeignKey('sports.sports_id')) #sports=tablename
-    city_id = db.Column(db.Integer, db.ForeginKey('cities.city_id')) #sports_id=thing we want from table
+    sport_id = db.Column(db.Integer, db.ForeignKey('sports.sport_id')) #sports=tablename
+    city_id = db.Column(db.Integer, db.ForeignKey('cities.city_id')) #sports_id=thing we want from table
     team_id = db.Column(db.Integer, db.ForeignKey('teams.team_id'))
-
+    #User.sports_id = sports.sports_id
     #gets us other table to create a relationship between
+    #lucia: confirm one to many relationship connection backref = one, 1st arg = many
     sport = db.relationship('Sport', backref='users') #Sport=class referenced
     city = db.relationship('City', backref='users') #current table name -> one-to-many style
-    availability = db.relationship('Availability', backref='users')
-    team = db.relationships('Team', backref='users')
+    team = db.relationship('Team', backref='users')
 
     def __repr__(self):
         return f'<User user_id={self.user_id} username={self.username}>'
@@ -32,7 +32,7 @@ class Sport(db.Model):
     sport_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     sport_name = db.Column(db.String)
     
-    capatible_parks_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'))
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'))
 
     park = db.relationship('Park', backref='sports')
 
@@ -45,7 +45,7 @@ class Park(db.Model):
     park_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     park_name = db.Column(db.String)
     #include address if I already have the park name and city?
-    city_location_id = db.Column(db.Integer, db.ForeignKey('cities.city_id'))
+    city_id = db.Column(db.Integer, db.ForeignKey('cities.city_id'))
 
     city = db.relationship('City', backref='parks')
 
@@ -67,12 +67,12 @@ class Team(db.Model):
     team_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     team_name = db.Column(db.String)
     
-    players_ids = db.Column(db.Integer, db.ForeginKey('users.user_id'))
-    practice_id = db.Column(db.Integer, db.ForeginKey('practices.practice_id'))
-    game_id = db.Column(db.Integer, db.ForeginKey('games.game_id'))
-    team_type_id = db.Column(db.Integer, db.ForeginKey('teams.team_type_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    practice_id = db.Column(db.Integer, db.ForeignKey('practices.practice_id'))
+    game_id = db.Column(db.Integer, db.ForeignKey('games.game_id'))
+    team_type_id = db.Column(db.Integer, db.ForeignKey('teams.team_type_id'))
 
-    player = db.relationship('User', backref='teams')
+    user = db.relationship('User', backref='teams')
     practice = db.relationship('Practice', backref='teams')
     game = db.relationship('Game', backref='teams')
     team_type = db.relationship('Team_type', backref='teams')
@@ -86,12 +86,12 @@ class Practice(db.Model):
     #excluded reoccurring option because idk how I would make the day and time 
     #repeat each week. Maybe extra little feature that I could add
     practice_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    start_time = db.Column(db.datetime)
-    end_time = db.Column(db.datetime)
+    start_time = db.Column(db.DateTime)
+    end_time = db.Column(db.DateTime)
     
-    location_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'))
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'))
 
-    location = db.relationship('Park', backref='practices')
+    park = db.relationship('Park', backref='practices')
 
     def __repr__(self):
         return f'Practice practice_id={self.practice_id} start_time={self.start_time}>'
@@ -101,15 +101,15 @@ class Game(db.Model):
     __tablename__ = 'games'
 
     game_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    start_time = db.Column(db.datetime)
-    end_time = db.Column(db.datetime)
+    start_time = db.Column(db.DateTime)
+    end_time = db.Column(db.DateTime)
     #lucia
     #opponent would be a team but a different team.... not sure how to represent
     opponent_id = db.Column(db.Integer, db.ForeignKey('teams.team_id'))
-    location_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'))
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'))
 
     opponent = db.relationship('Team', backref='games')
-    location = db.relationship('Park', backref='games')
+    park = db.relationship('Park', backref='games')
 
     def __repr__(self):
         return f'Game game_id={self.game_id} start_time={self.start_time}>'
@@ -126,15 +126,16 @@ class Team_type(db.Model):
 
 
 #lucia
-# def connect_to_db(flask_app, db_uri='postgresql:///ratings', echo=True):
-#     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
-#     flask_app.config['SQLALCHEMY_ECHO'] = echo
-#     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#database name = games, called with psql
+def connect_to_db(flask_app, db_uri='postgresql:///games', echo=True):
+    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+    flask_app.config['SQLALCHEMY_ECHO'] = echo
+    flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-#     db.app = flask_app
-#     db.init_app(flask_app)
+    db.app = flask_app #connects db to server
+    db.init_app(flask_app) #initalize with flask app
 
-#     print('Connected to the db!')
+    print('Connected to the db!')
 
 
 if __name__ == '__main__':
@@ -144,8 +145,7 @@ if __name__ == '__main__':
     # too annoying; this will tell SQLAlchemy not to print out every
     # query it executes.
 
-    # connect_to_db(app)
-
+    connect_to_db(app)
 
 
 
