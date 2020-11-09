@@ -32,8 +32,10 @@ def create_sport(sport_name, park):
 
     return sport
 
-def create_availability(date):
+def create_availability(date_str):ß
     """date the user is available to play; needed to create a player"""
+    format = '%m-%d-%Y %I:%M%p'
+    date = datetime.strptime(date_str, format)
     availability = Availability(date=date) #add formating
     db.session.add(availability)
     db.session.commit()
@@ -56,9 +58,15 @@ def create_team_type(ttype):
 
     return team_type
 
-def create_game(start, end, location):
+def create_game(str_start, str_end, location):
     """ takes in a start date&time, end date&time, and park as location. It outputs a game. relies on pre-created park"""
-
+    # str = '11-20-2020 11:30AM'
+    # format = '%m-%d-%Y %I:%M%p'
+    # new_date = datetime.strptime(date_str, format)
+    # check date: new_date.strftime(format)
+    format = '%m-%d-%Y %I:%M%p'
+    start = datetime.strptime(str_start, format)
+    end = datetime.strptime(str_end, format)
     game = Game(start_time=start, end_time=end, park=location) #format date
     db.session.add(game)
     db.session.commit()
