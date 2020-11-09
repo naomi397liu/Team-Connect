@@ -26,7 +26,7 @@ def create_sport(sport_name, park):
     """ creates a sport that is supported by a specific park; needs a park to have a sport otherwise where would you play
     needed to create player"""
 
-    sport = Sport(sport_name, park)
+    sport = Sport(sport_name=sport_name, park=park)
     db.session.add(sport)
     db.session.commit()
 
