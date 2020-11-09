@@ -4,20 +4,19 @@ from model import db, User, Sport, Park, City, Team, Game, Availability, Team_ty
 from datetime import datetime
 
 # creating data:
-def create_city(city_name):
+def create_city(name):
     """ creates a city needed to create a park for the sport to be played in; needed to create user to assess 
     what parks/other users they can play in/with"""
-
-    city = City(city_name)
+    city = City(city_name=name)
     db.session.add(city)
     db.session.commit()
 
     return city
 
-def create_park(park_name, city):
+def create_park(name, city):
     """ creates a park for the sport to be played in. Needs a pre-created city for the park to exist in"""
 
-    park = Park(park_name, city)
+    park = Park(park_name=name, city=city)
     db.session.add(park)
     db.session.commit()
 
