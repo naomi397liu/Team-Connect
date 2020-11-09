@@ -34,7 +34,7 @@ def create_sport(sport_name, park):
 
 def create_availability(date):
     """date the user is available to play; needed to create a player"""
-    availability = Availability(date)
+    availability = Availability(date=date)
     db.session.add(availability)
     db.session.commit()
 
@@ -43,14 +43,14 @@ def create_availability(date):
 def create_player(user, pw, bio, sport, city, team, avail):
     """ creates a new player's profile """
    
-    user = User(user, pw, bio, sport, city, team, avail)
+    user = User(username=user, password=pw, bio=bio, sport=sport, city=city, team=team, availability=avail)
     db.session.add(user)
     db.session.commit()
     return user
 
 def create_team_type(ttype):
     """ creates team type ie womens,mens,co-ed; needed to create a team"""
-    team_type = Team_type(ttype)
+    team_type = Team_type(team_type=ttype)
     db.session.add(team_type)
     db.session.commit()
 
