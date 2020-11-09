@@ -34,7 +34,7 @@ def create_sport(sport_name, park):
 
 def create_availability(date):
     """date the user is available to play; needed to create a player"""
-    availability = Availability(date=date)
+    availability = Availability(date=date) #add formating
     db.session.add(availability)
     db.session.commit()
 
@@ -59,7 +59,7 @@ def create_team_type(ttype):
 def create_game(start, end, location):
     """ takes in a start date&time, end date&time, and park as location. It outputs a game. relies on pre-created park"""
 
-    game = Game(start, end, location)
+    game = Game(start_time=start, end_time=end, park=location) #format date
     db.session.add(game)
     db.session.commit()
 
@@ -67,7 +67,7 @@ def create_game(start, end, location):
 
 def create_team(name, game, team_type):
     """ creates a team, but requires a precreated game time and team_type """
-    team = Team(name, game, team_type)
+    team = Team(team_name=name, game=game, team_type=team_type)
     db.session.add(team)
     db.session.commit()
 
