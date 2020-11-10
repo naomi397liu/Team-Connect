@@ -1,6 +1,9 @@
 """ model for PickUpBall app """
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime 
+from datetime import datetime, time
+
+
+
 
 db = SQLAlchemy()
 
@@ -31,10 +34,14 @@ class Availability(db.Model):
     """ Availabile days of the weeks and times for a user """
     __tablename__ = 'availabilities'
     availability_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    date = db.Column(db.DateTime)
+    day = db.Column(db.DateTime) #day of the week
+    upper_time = db.Column(db.Time)
+    lower_time = db.Column(db.Time) 
+    # lower_time=datetime.time(hour=1, minute=5))
+    # Availability(day=datetime.now(), upper_time=time(1,2,3), lower_time=time(2,3,4))
 
     def __repr__(self):
-        return f'<Availability availability_id={self.availability_id} date={self.date}'
+        return f'<Availability availability_id={self.availability_id} date={self.day}'
 class Sport(db.Model):
     """ sports user can choose from """
     __tablename__ = 'sports'
