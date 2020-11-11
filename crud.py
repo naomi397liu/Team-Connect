@@ -62,10 +62,10 @@ def create_player(user, pw, bio, sport, city):
     db.session.commit()
     return user
 
-def get_player_by_id(user_id):
-    """return user by primary key"""
+def get_players():
+    """return all users"""
 
-    return User.query.get(user_id)
+    return User.query.all()
 
 def create_team_type(ttype):
     """ creates team type ie womens,mens,co-ed; needed to create a team"""

@@ -15,11 +15,17 @@ def create_user():
 
     return render_template('createuser.html')
 
-# @app.route('/display_profile')
-# def display_user(user_id):
-#     """Show profile.html template """
-#     user = 
-#     return render_template('profile.html', user=user)
+@app.route('/nav')
+def navigate():
+    """ Show Navigation page """
+
+    return render_template("nav.html")
+
+@app.route('/users')
+def users():
+    """Show profile.html template """
+    users = crud.get_players()
+    return render_template('profile.html', users=users)
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')
