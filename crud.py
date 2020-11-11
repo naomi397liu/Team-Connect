@@ -1,6 +1,6 @@
 """ functions to create tables and filter/query them """
 
-from model import db, User, Sport, Park, City, Team, Game, Availability, Team_type, connect_to_db
+from model import db, User, Sport, Park, City, Team, Game, Team_type, connect_to_db
 from datetime import datetime, time
 
 # creating data:
@@ -32,35 +32,40 @@ def create_sport(sport_name, park):
 
     return sport
 
-def create_availability(date_str, upper_strhr, upper_strmin, lower_strhr, lower_strmin):
-    """date the user is available to play; needed to create a player"""
-    #convert to int
-    upper_inthr=int(upper_strhr)
-    upper_intmin=int(upper_strmin)
-    lower_inthr=int(lower_strhr)
-    lower_intmin=int(lower_strmin)
+# def create_availability(date_str, upper_strhr, upper_strmin, lower_strhr, lower_strmin):
+#     """date the user is available to play; needed to create a player"""
+#     #convert to int
+#     upper_inthr=int(upper_strhr)
+#     upper_intmin=int(upper_strmin)
+#     lower_inthr=int(lower_strhr)
+#     lower_intmin=int(lower_strmin)
 
-    upper = time(upper_inthr, upper_intmin) #time(1,2,3) -convert to integer: int()
-    lower = time(lower_inthr, lower_intmin)
-    format = '%a' #abbreviated day of the week
-    date = datetime.strptime(date_str, format)
-    availability = Availability(date=date, upper_time=upper, lower_time=lower) #add formating
-    db.session.add(availability)
-    db.session.commit()
+#     upper = time(upper_inthr, upper_intmin) #time(1,2,3) -convert to integer: int()
+#     lower = time(lower_inthr, lower_intmin)
+#     format = '%a' #abbreviated day of the week
+#     date = datetime.strptime(date_str, format)
+#     availability = Availability(date=date, upper_time=upper, lower_time=lower) #add formating
+#     db.session.add(availability)
+#     db.session.commit()
 
-    return availability
+#     return availability
     #  str = '11-20-2020 11:30AM'
     # format = '%m-%d-%Y %I:%M%p'
     # new_date = datetime.strptime(date_str, format)
     # check date: new_date.strftime(format)
 
-def create_player(user, pw, bio, sport, city, team, avail):
+def create_player(user, pw, bio, sport, city):
     """ creates a new player's profile """
    
-    user = User(username=user, password=pw, bio=bio, sport=sport, city=city, team=team, availability=avail)
+    user = User(username=user, password=pw, bio=bio, sport=sport, city=city)
     db.session.add(user)
     db.session.commit()
     return user
+
+def get_player_by_id(user_id):
+    """return user by primary key"""
+
+    return User.query.get(user_id)
 
 def create_team_type(ttype):
     """ creates team type ie womens,mens,co-ed; needed to create a team"""

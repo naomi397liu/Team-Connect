@@ -18,30 +18,30 @@ class User(db.Model):
     #one user can have multiple availabilities
     sport_id = db.Column(db.Integer, db.ForeignKey('sports.sport_id')) #sports=tablename
     city_id = db.Column(db.Integer, db.ForeignKey('cities.city_id')) #sports_id=thing we want from table
-    team_id = db.Column(db.Integer, db.ForeignKey('teams.team_id'))
-    availability_id = db.Column(db.Integer, db.ForeignKey('availabilities.availability_id'))
+    # team_id = db.Column(db.Integer, db.ForeignKey('teams.team_id'))
+    # availability_id = db.Column(db.Integer, db.ForeignKey('availabilities.availability_id'))
     #User.sports_id = sports.sports_id
     #gets us other table to create a relationship between
     sport = db.relationship('Sport', backref='users') #Sport=class referenced
     city = db.relationship('City', backref='users') #current table name -> one-to-many style
-    team = db.relationship('Team', backref='users') #does this mean that my team needs to be created before my user?
-    availability = db.relationship('Availability', backref='users') #user can have multiple availabilities
+    # #does this mean that my team needs to be created before my user?
+    # availability = db.relationship('Availability', backref='users') #user can have multiple availabilities
 
     def __repr__(self):
         return f'<User user_id={self.user_id} username={self.username}>'
 
-class Availability(db.Model):
-    """ Availabile days of the weeks and times for a user """
-    __tablename__ = 'availabilities'
-    availability_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    day = db.Column(db.DateTime) #day of the week
-    upper_time = db.Column(db.Time)
-    lower_time = db.Column(db.Time) 
-    # lower_time=datetime.time(hour=1, minute=5))
-    # Availability(day=datetime.now(), upper_time=time(1,2,3), lower_time=time(2,3,4))
+# class Availability(db.Model):
+#     """ Availabile days of the weeks and times for a user """
+#     __tablename__ = 'availabilities'
+#     availability_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+#     day = db.Column(db.DateTime) #day of the week
+#     upper_time = db.Column(db.Time)
+#     lower_time = db.Column(db.Time) 
+#     # lower_time=datetime.time(hour=1, minute=5))
 
-    def __repr__(self):
-        return f'<Availability availability_id={self.availability_id} date={self.day}'
+#     def __repr__(self):
+#         return f'<Availability availability_id={self.availability_id} date={self.day}'
+
 class Sport(db.Model):
     """ sports user can choose from """
     __tablename__ = 'sports'
