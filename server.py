@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, flash
+from flask import Flask, request, render_template, flash, redirect
 import crud
 from jinja2 import StrictUndefined
 
@@ -22,11 +22,27 @@ def navigate():
     """ Show Navigation page """
     return render_template("nav.html")
 
-# @app.route('/users', methods=["POST"])
-# def users():
-#     """Show profile.html template """
-#     users = crud.get_players()
-#     return render_template('profile.html', users=users)
+@app.route('/users', methods=["POST"])
+def register_user():
+    """Show profile.html template """
+    #create city
+    city = request.form.get('cities')
+    crud.create_city(city)
+    flash('City created! Please log in.')
+    #create sport
+
+    #create player
+    # user_id = session['user_id']
+
+    # users = crud.get_players()
+    return redirect('/nav')
+
+@app.route('/users')
+def display_user():
+    """ display all users that have been created """
+    cities = crud.get_city()
+
+    return render_template('users.html', cities=cities)
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0')

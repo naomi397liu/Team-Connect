@@ -4,15 +4,16 @@
 {% block head %}Create Account{% endblock %}
 
   {% block body %}
-    <form action="/">
+    <form action="/users" method="POST">
       username:
       <input type="text" name="username"><br>
       password:
       <input type="text" name="password"><br><br>
       sport(s): <br>
-      <input type="checkbox" name="soccer">Soccer<br>
-      <input type="checkbox" name="basketball">Basketball<br>
-      <input type="checkbox" name="volleyball">Volleyball<br><br>
+      <select name="sports" id="sports"></select>
+        <option value="soccer">Soccer</option>
+        <option value="basketball">Basketball</option>
+        <option value="volleyball">Volleyball</option><br>
       city: <br>
       <select name="cities" id="cities">
           <option value="San Francisco">San Francisco</option>

@@ -4,6 +4,7 @@ from model import db, User, Sport, Park, City, Team, Game, Team_type, connect_to
 from datetime import datetime, time
 
 # creating data:
+#1
 def create_city(name):
     """ creates a city needed to create a park for the sport to be played in; needed to create user to assess 
     what parks/other users they can play in/with"""
@@ -13,6 +14,10 @@ def create_city(name):
 
     return city
 
+def get_city():
+    """ displays all cities """
+    return City.query.all()
+    
 def create_park(name, city):
     """ creates a park for the sport to be played in. Needs a pre-created city for the park to exist in"""
 
@@ -22,15 +27,29 @@ def create_park(name, city):
 
     return park
 
-def create_sport(sport_name, park):
+#2
+def create_sport(sport_name):
     """ creates a sport that is supported by a specific park; needs a park to have a sport otherwise where would you play
     needed to create player"""
 
-    sport = Sport(sport_name=sport_name, park=park)
+    sport = Sport(sport_name=sport_name)
     db.session.add(sport)
     db.session.commit()
 
     return sport
+#3
+def create_player(user, pw, bio, sport, city):
+    """ creates a new player's profile """
+   
+    user = User(username=user, password=pw, bio=bio, sport=sport, city=city)
+    db.session.add(user)
+    db.session.commit()
+    return user
+
+def get_players():
+    """return all users"""
+
+    return User.query.all()
 
 # def create_availability(date_str, upper_strhr, upper_strmin, lower_strhr, lower_strmin):
 #     """date the user is available to play; needed to create a player"""
@@ -54,18 +73,7 @@ def create_sport(sport_name, park):
     # new_date = datetime.strptime(date_str, format)
     # check date: new_date.strftime(format)
 
-def create_player(user, pw, bio, sport, city):
-    """ creates a new player's profile """
-   
-    user = User(username=user, password=pw, bio=bio, sport=sport, city=city)
-    db.session.add(user)
-    db.session.commit()
-    return user
 
-def get_players():
-    """return all users"""
-
-    return User.query.all()
 
 def create_team_type(ttype):
     """ creates team type ie womens,mens,co-ed; needed to create a team"""

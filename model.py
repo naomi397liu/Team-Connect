@@ -48,9 +48,9 @@ class Sport(db.Model):
     sport_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     sport_name = db.Column(db.String)
     
-    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'))
+    # park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'))
 
-    park = db.relationship('Park', backref='sports')
+    # park = db.relationship('Park', backref='sports')
 
     def __repr__(self):
         return f'<Sport sport_id={self.sport_id} sport_name={self.sport_name}>'
