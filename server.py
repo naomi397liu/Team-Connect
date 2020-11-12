@@ -1,7 +1,10 @@
 from flask import Flask, request, render_template
 import crud
+from jinja2 import StrictUndefined
 
 app = Flask(__name__)
+app.secret_key = "ABC"
+app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def login():
