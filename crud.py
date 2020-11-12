@@ -53,7 +53,7 @@ def get_players():
 
 def get_player_by_username(username):
     """gets a player by unique username """
-    return User.query.filter(username == User.email).first()
+    return User.query.filter(username == User.username).first()
 
 # def create_availability(date_str, upper_strhr, upper_strmin, lower_strhr, lower_strmin):
 #     """date the user is available to play; needed to create a player"""

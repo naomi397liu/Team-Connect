@@ -43,6 +43,7 @@ def register_user():
     bio = request.form.get('bio')
     if crud.get_player_by_username(username):
         flash(f'Sorry! That username is already in use!')
+        return redirect('/createuser')
     else:
         user = crud.create_player(username, password, bio, s, c)
         flash(f'Hi, {user.username}! You are now logged in.')
