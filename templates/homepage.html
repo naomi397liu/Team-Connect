@@ -1,7 +1,8 @@
+{% extends 'base.html' %}
 
-{% block title %}Welcome!{% endblock %}
+{% block title %}Login{% endblock %}
 
-  {% block head %}Login{% endblock %}
+  <h4>{% block head %}Welcome to Login page!{% endblock %}</h4>
 
   {% block body %}
       
@@ -14,8 +15,8 @@
     </form>
 
     <form action="/createuser">
-      <h3>Are you a new user?</h3><br>
+      <h4>Are you a new user?</h4>
       <input type="submit" value="Create new user">
     </form>
-    
+
   {% endblock %}

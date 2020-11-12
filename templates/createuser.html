@@ -1,6 +1,9 @@
-<!DOCTYPE html><html>
-<h2>Create account</h2>
-  <body>
+{% extends 'base.html' %}
+{% block title %}Create Account{% endblock %}
+
+{% block head %}Create Account{% endblock %}
+
+  {% block body %}
     <form action="/">
       username:
       <input type="text" name="username"><br>
@@ -23,6 +26,4 @@
       <input type="submit" value="Create Account and return to Login"><br>
     </form>
 
-</body>
-
-</html>
+  {% endblock %}
