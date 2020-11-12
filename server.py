@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, flash, redirect
 import crud
 from jinja2 import StrictUndefined
+from model import connect_to_db
 
 app = Flask(__name__)
 app.secret_key = "ABC"
@@ -27,22 +28,27 @@ def register_user():
     """Show profile.html template """
     #create city
     city = request.form.get('cities')
-    crud.create_city(city)
-    flash('City created! Please log in.')
+    c = crud.create_city(city) 
     #create sport
-
+    sport = request.form.get('sports')
+    s = crud.create_sport(sport)
+    
     #create player
-    # user_id = session['user_id']
+    username = request.form.get('username')
+    password = request.form.get('password')
+    bio = request.form.get('bio')
 
-    # users = crud.get_players()
+    user = crud.create_player(username, password, bio, s, c)
+    flash(f'Hi, {user.username}! You are now logged in.')
     return redirect('/nav')
 
 @app.route('/users')
 def display_user():
     """ display all users that have been created """
-    cities = crud.get_city()
+    users = crud.get_players()
 
-    return render_template('users.html', cities=cities)
+    return render_template('users.html', users=users)
 
 if __name__ == "__main__":
+    connect_to_db(app)
     app.run(debug=True, host='0.0.0.0')

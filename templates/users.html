@@ -1,12 +1,14 @@
-{% extends 'base.html'}
-{% block title %}Display Users{% endblock %}
-{% block head %}Display Users{% endblock %}
+{% extends 'base.html' %}
+{% block title %} Display Users {% endblock %}
+{% block head %} Display Users {% endblock %}
 
   {% block body %}
     <ul>
-      {% for city in cities %}
+      {% for user in users %}
         <li>
-            {{ city }}
+            <h4>{{user.username}}:</h4><br>
+            {{user.sport.sport_name}}<br>
+            {{user.city.city_name}}
           
         </li>
       {% endfor %}

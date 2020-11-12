@@ -5,19 +5,19 @@ from datetime import datetime, time
 
 # creating data:
 #1
-def create_city(name):
+def create_city(city_name):
     """ creates a city needed to create a park for the sport to be played in; needed to create user to assess 
     what parks/other users they can play in/with"""
-    city = City(city_name=name)
-    db.session.add(city)
+    c=City(city_name=city_name)
+    db.session.add(c)
     db.session.commit()
 
-    return city
+    return c
 
 def get_city():
     """ displays all cities """
     return City.query.all()
-    
+
 def create_park(name, city):
     """ creates a park for the sport to be played in. Needs a pre-created city for the park to exist in"""
 

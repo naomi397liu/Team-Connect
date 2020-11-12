@@ -3,8 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, time
 
 
-
-
 db = SQLAlchemy()
 
 class User(db.Model):
@@ -141,8 +139,6 @@ if __name__ == '__main__':
     # query it executes.
 
     connect_to_db(app)
-
-
-
+    db.create_all()
 
 
