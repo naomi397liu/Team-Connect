@@ -8,7 +8,7 @@ app.secret_key = "ABC"
 app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
-def login():
+def show_login():
     """Show hello.html template."""
     return render_template('homepage.html')
 
@@ -23,9 +23,13 @@ def navigate():
     """ Show Navigation page """
     return render_template("nav.html")
 
+@app.route('/nav,', methods=["POST"])
+def login():
+    """allow user to login """
+
 @app.route('/users', methods=["POST"])
 def register_user():
-    """Show profile.html template """
+    """create user template """
     #create city
     city = request.form.get('cities')
     c = crud.create_city(city) 
@@ -37,10 +41,12 @@ def register_user():
     username = request.form.get('username')
     password = request.form.get('password')
     bio = request.form.get('bio')
-
-    user = crud.create_player(username, password, bio, s, c)
-    flash(f'Hi, {user.username}! You are now logged in.')
-    return redirect('/nav')
+    if crud.get_player_by_username(username):
+        flash(f'Sorry! That username is already in use!')
+    else:
+        user = crud.create_player(username, password, bio, s, c)
+        flash(f'Hi, {user.username}! You are now logged in.')
+        return redirect('/nav')
 
 @app.route('/users')
 def display_user():
