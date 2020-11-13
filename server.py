@@ -60,6 +60,11 @@ def login():
         flash(f'The password you inputed for {users_login.username} is incorrect. Try again!')
         return redirect('/')
 
+@app.route('/teams')
+def create_team():
+    """ form to create new team is rendered """
+    return render_template("createteam.html")
+
 @app.route('/users', methods=["POST"])
 def register_user():
     """create user template """

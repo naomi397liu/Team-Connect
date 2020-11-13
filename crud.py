@@ -1,6 +1,6 @@
 """ functions to create tables and filter/query them """
 
-from model import db, User, Sport, Park, City, Team, Game, Team_type, connect_to_db
+from model import db, User, Sport, Park, City, Team, connect_to_db
 from datetime import datetime, time
 
 # creating data:
