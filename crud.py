@@ -13,7 +13,9 @@ def create_city(city_name):
     db.session.commit()
 
     return c
-
+def current_user():
+    return db.session
+    
 def get_city():
     """ displays all cities """
     return City.query.all()
