@@ -14,13 +14,27 @@ def create_city(city_name):
 
     return c
 
-def get_players_by_sport(sport):
+def get_players_by_sport(sport_name):
+    """takes in a string: sport_name and outputs a list of players with that sports_name"""
+     #TODO: user SQL filter_by to do this 
+    teammates = []
+    players = User.query.all()
+    for player in players:
+        if (player.sport.sport_name).lower() == (sport_name).lower():
+            teammates.append(player)
 
-    return User.query.filter(User.sport==sport).all()
+    return teammates
 
-def get_players_by_city(city):
-
-    return User.query.filter(city).all()
+def get_players_by_city(city_name):
+    """ takes in a city_name from db and outputs a list of players with that city_name"""
+    #TODO: user SQL filter_by to do this 
+    teammates = []
+    players = User.query.all()
+    for player in players:
+        if (player.city.city_name) == city_name:
+           teammates.append(player)
+    
+    return teammates
 
 
 def get_city():
