@@ -18,6 +18,11 @@ def create_user():
     # user = create_player(user, pw, bio, sport, city)
     return render_template('createuser.html')
 
+@app.route('/search')
+def search():
+    """ see teammates that share your city and sport """
+    return render_template('findteammates.html')
+
 @app.route('/nav')
 def navigate():
     """ Show Navigation page """
