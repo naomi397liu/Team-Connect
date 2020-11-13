@@ -23,9 +23,19 @@ def navigate():
     """ Show Navigation page """
     return render_template("nav.html")
 
-@app.route('/nav,', methods=["POST"])
+@app.route('/login')
 def login():
     """allow user to login """
+    username = request.args.get('username')
+    password = request.args.get('password')
+
+    users_login = crud.get_player_by_username(username)
+    
+    if users_login.password == password:
+        return redirect('/nav')
+    else:
+        flash(f'The password you inputed for {users_login.username} is incorrect. Try again!')
+        return redirect('/')
 
 @app.route('/users', methods=["POST"])
 def register_user():
