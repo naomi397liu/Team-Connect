@@ -13,9 +13,16 @@ def create_city(city_name):
     db.session.commit()
 
     return c
-def current_user():
-    return db.session
-    
+
+def get_players_by_sport(sport):
+
+    return User.query.filter(User.sport==sport).all()
+
+def get_players_by_city(city):
+
+    return User.query.filter(city).all()
+
+
 def get_city():
     """ displays all cities """
     return City.query.all()

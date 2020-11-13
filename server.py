@@ -21,11 +21,21 @@ def create_user():
 @app.route('/search')
 def search():
     """ see teammates that share your city and sport """
+    user_in_session = session['current_user']
+    profile = crud.get_player_by_username(user_in_session)
     
-    # users_profile = crud.get_player_by_username(username)
-    flash(f'current user: {crud.current_user()}')
-
-    return render_template('findteammates.html')
+    sport = profile.sport
+    flash(f"profile:{sport}")
+    location = profile.city
+    flash(f"profile:{location}")
+    
+    # shared_location = crud.get_players_by_city(location)
+    
+    # if shared_sport and shared_location:
+    potentials = crud.get_players()
+    # else:
+    #     flash("You have no potential teammates :(")
+    return render_template('findteammates.html', potentials=potentials)
 
 @app.route('/nav')
 def navigate():
