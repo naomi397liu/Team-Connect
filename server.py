@@ -60,14 +60,39 @@ def login():
         flash(f'The password you inputed for {users_login.username} is incorrect. Try again!')
         return redirect('/')
 
-@app.route('/teams')
+@app.route('/createteam')
 def create_team():
     """ form to create new team is rendered """
+    #TODO: create a playing location? ie park? so people don't join teams that meet hella far
     return render_template("createteam.html")
+
+@app.route('/teams', methods=["POST"])
+def register_team():
+    #TODO: instead of creating a new city and sport each time, just have an immutable table for each
+    #and call them - for create user too then you will have to modify potential players 
+    #because the IDs will match up and you won't have to match the string names
+    #TODO: for park however, you can just create a new park if that park doesn't already exist in the table
+    #for that city
+    team_name = request.form.get('team_name')
+    description = request.form.get('description')
+    city = request.form.get('cities')
+    team_city = crud.create_city(city) #change to crud.get_city(city)
+    #create the sport
+    sport = request.form.get('sports')
+    team_sport = crud.create_sport(sport)
+    #create park
+    park = request.form.get('park')
+    teams_park = crud.create_park(park, team_city)
+
+    my_team = crud.create_team(team_name, description, team_sport, team_city, teams_park)
+    session['my_teams'] = my_team.team_name
+    flash(f'Your team {my_team.team_name} has been created!')
+    flash(f'my session:{session}')
+    redirect('/nav')
 
 @app.route('/users', methods=["POST"])
 def register_user():
-    """create user template """
+    """create user and adds them to the database"""
     #create city
     city = request.form.get('cities')
     c = crud.create_city(city) 

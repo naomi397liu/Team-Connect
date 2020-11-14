@@ -41,15 +41,6 @@ def get_city():
     """ displays all cities """
     return City.query.all()
 
-def create_park(name, city):
-    """ creates a park for the sport to be played in. Needs a pre-created city for the park to exist in"""
-
-    park = Park(park_name=name, city=city)
-    db.session.add(park)
-    db.session.commit()
-
-    return park
-
 #2
 def create_sport(sport_name):
     """ creates a sport that is supported by a specific park; needs a park to have a sport otherwise where would you play
@@ -78,61 +69,21 @@ def get_player_by_username(username):
     """gets a player by unique username """
     return User.query.filter(username == User.username).first()
 
-# def create_availability(date_str, upper_strhr, upper_strmin, lower_strhr, lower_strmin):
-#     """date the user is available to play; needed to create a player"""
-#     #convert to int
-#     upper_inthr=int(upper_strhr)
-#     upper_intmin=int(upper_strmin)
-#     lower_inthr=int(lower_strhr)
-#     lower_intmin=int(lower_strmin)
-
-#     upper = time(upper_inthr, upper_intmin) #time(1,2,3) -convert to integer: int()
-#     lower = time(lower_inthr, lower_intmin)
-#     format = '%a' #abbreviated day of the week
-#     date = datetime.strptime(date_str, format)
-#     availability = Availability(date=date, upper_time=upper, lower_time=lower) #add formating
-#     db.session.add(availability)
-#     db.session.commit()
-
-#     return availability
-    #  str = '11-20-2020 11:30AM'
-    # format = '%m-%d-%Y %I:%M%p'
-    # new_date = datetime.strptime(date_str, format)
-    # check date: new_date.strftime(format)
-
-
-
-def create_team_type(ttype):
-    """ creates team type ie womens,mens,co-ed; needed to create a team"""
-    team_type = Team_type(team_type=ttype)
-    db.session.add(team_type)
-    db.session.commit()
-
-    return team_type
-
-def create_game(str_start, str_end, location):
-    """ takes in a start date&time, end date&time, and park as location. It outputs a game. relies on pre-created park"""
-    # str = '11-20-2020 11:30AM'
-    # format = '%m-%d-%Y %I:%M%p'
-    # new_date = datetime.strptime(date_str, format)
-    # check date: new_date.strftime(format)
-    format = '%m-%d-%Y %I:%M%p'
-    start = datetime.strptime(str_start, format)
-    end = datetime.strptime(str_end, format)
-    game = Game(start_time=start, end_time=end, park=location) #format date
-    db.session.add(game)
-    db.session.commit()
-
-    return game
-
-def create_team(name, game, team_type):
-    """ creates a team, but requires a precreated game time and team_type """
-    team = Team(team_name=name, game=game, team_type=team_type)
+def create_team(name, description, sport, city, park):
+    """ creates a team and takes in a team name, desciption, sport from table, city from table and park from table"""
+    team = Team(team_name=name, description=description, sport=sport, city=city, park=park)
     db.session.add(team)
     db.session.commit()
 
     return team
 
+def create_park(park_name, city):
+    """ takes in a park name & city from city table it is in and adds it to the park table """
+    park = Park(park_name, city)
+    db.session.add(park)
+    db.session.commit()
+
+    return park
 
 if __name__ == '__main__':
     from server import app

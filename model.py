@@ -58,8 +58,15 @@ class Team(db.Model):
     __tablename__ = 'teams'
     team_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     team_name = db.Column(db.String)
+    description = db.Column(db.String)
     
-    team_type_id = db.Column(db.Integer, db.ForeignKey('team_type.team_type_id'))
+    sport_id = db.Column(db.Integer, db.ForeignKey('sports.sport_id')) #sports=tablename
+    city_id = db.Column(db.Integer, db.ForeignKey('cities.city_id')) #sports_id=thing we want from table
+    park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'))
+
+    sport = db.relationship('Sport', backref='teams') #Sport=class referenced
+    city = db.relationship('City', backref='teams')
+    park = db.Column('Park', backref='teams')
 
     def __repr__(self):
         return f'<Team team_id={self.team_id} team_name={self.team_name}>'
