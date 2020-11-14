@@ -69,9 +69,9 @@ def get_player_by_username(username):
     """gets a player by unique username """
     return User.query.filter(username == User.username).first()
 
-def create_team(name, description, sport, city, park):
+def create_team(name, description, sport, city):
     """ creates a team and takes in a team name, desciption, sport from table, city from table and park from table"""
-    team = Team(team_name=name, description=description, sport=sport, city=city, park=park)
+    team = Team(team_name=name, description=description, sport=sport, city=city)
     db.session.add(team)
     db.session.commit()
 
@@ -79,7 +79,7 @@ def create_team(name, description, sport, city, park):
 
 def create_park(park_name, city):
     """ takes in a park name & city from city table it is in and adds it to the park table """
-    park = Park(park_name, city)
+    park = Park(park_name=park_name, city=city)
     db.session.add(park)
     db.session.commit()
 

@@ -81,13 +81,13 @@ def register_team():
     sport = request.form.get('sports')
     team_sport = crud.create_sport(sport)
     #create park
-    park = request.form.get('park')
-    teams_park = crud.create_park(park, team_city)
+    # park = request.form.get('park')
+    # teams_park = crud.create_park(park, team_city)
 
-    my_team = crud.create_team(team_name, description, team_sport, team_city, teams_park)
-    session['my_teams'] = my_team.team_name
+    my_team = crud.create_team(team_name, description, team_sport, team_city)
+    # session['my_teams'] = my_team.team_name
     flash(f'Your team {my_team.team_name} has been created!')
-    flash(f'my session:{session}')
+    # flash(f'my session:{session}')
     redirect('/nav')
 
 @app.route('/users', methods=["POST"])
