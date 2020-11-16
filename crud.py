@@ -41,6 +41,13 @@ def get_city():
     """ displays all cities """
     return City.query.all()
 
+def get_sport_by_id(num):
+    """Takes in an ID and returns the object sport that corresponds to it"""
+    return Sport.query.filter_by(sport_id = num).first()
+
+def get_city_by_id(num):
+    """takes in an ID and returns the object city that corresponds to it"""
+    return City.query.filter_by(city_id = num).first()
 #2
 def create_sport(sport_name):
     """ creates a sport that is supported by a specific park; needs a park to have a sport otherwise where would you play

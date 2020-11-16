@@ -68,6 +68,7 @@ def create_team():
 
 @app.route('/teams', methods=["POST"])
 def register_team():
+    #maybe their primary keys must match? make tables more indpendent?
     #TODO: instead of creating a new city and sport each time, just have an immutable table for each
     #and call them - for create user too then you will have to modify potential players 
     #because the IDs will match up and you won't have to match the string names
@@ -79,7 +80,7 @@ def register_team():
     team_city = crud.create_city(city) #change to crud.get_city(city)
     #create the sport
     sport = request.form.get('sports')
-    team_sport = crud.create_sport(sport)
+    team_sport = crud.create_sport(sport) #get_sport_by_id
     #create park
     # park = request.form.get('park')
     # teams_park = crud.create_park(park, team_city)
