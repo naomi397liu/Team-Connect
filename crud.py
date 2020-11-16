@@ -14,32 +14,47 @@ def create_city(city_name):
 
     return c
 
-def get_players_by_sport(sport_name):
+def get_players_by_sport(sport_obj):
     """takes in a string: sport_name and outputs a list of players with that sports_name"""
      #TODO: user SQL filter_by to do this 
     teammates = []
     players = User.query.all()
     for player in players:
-        if (player.sport.sport_name).lower() == (sport_name).lower():
+        if player.sport == sport_obj:
             teammates.append(player)
 
     return teammates
 
-def get_players_by_city(city_name):
+def get_players_by_city(city_obj):
     """ takes in a city_name from db and outputs a list of players with that city_name"""
     #TODO: user SQL filter_by to do this 
     teammates = []
     players = User.query.all()
     for player in players:
-        if (player.city.city_name) == city_name:
+        if player.city == city_obj:
            teammates.append(player)
     
     return teammates
 
+def get_player_by_id(num):
+    """takes in an ID and returns object users that corresponds with it"""
+    return User.query.filter_by(user_id = num).first()
 
 def get_city():
     """ displays all cities """
     return City.query.all()
+
+def get_teams():
+    """ displays all teams """
+    return Team.query.all()
+
+def get_team_by_id(id):
+    """gets the team that corresponds with the id taken in"""
+    return Team.query.filter_by(team_id = id).first()
+
+def get_team_by_teamname(name):
+    """ takes in a team name and out puts the team object that corresponds with it"""
+    return Team.query.filter_by(team_name = name).first()
 
 def get_sport_by_id(num):
     """Takes in an ID and returns the object sport that corresponds to it"""

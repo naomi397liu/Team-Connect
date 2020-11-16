@@ -57,7 +57,7 @@ class Team(db.Model):
     """ contains information for a given team """
     __tablename__ = 'teams'
     team_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    team_name = db.Column(db.String)
+    team_name = db.Column(db.String, unique=True)
     description = db.Column(db.String)
     
     sport_id = db.Column(db.Integer, db.ForeignKey('sports.sport_id')) #sports=tablename

@@ -23,14 +23,11 @@ def search():
     """ see teammates that share your city and sport """
     #collect current user info
     flash(f"These are all the potential teammates based on your location and activity interest!")
-    user_in_session = session['current_user']
-    profile = crud.get_player_by_username(user_in_session)
-    sport = profile.sport.sport_name
-    location = profile.city.city_name
+    profile = crud.get_player_by_id(session['current_user'])
     #collect matching info
     potentials = []
-    sport_potentials = crud.get_players_by_sport(sport)
-    city_potentials = crud.get_players_by_city(location)
+    sport_potentials = crud.get_players_by_sport(profile.sport)
+    city_potentials = crud.get_players_by_city(profile.city)
     players = crud.get_players()
     #check all players for matches
     for player in players:
@@ -51,10 +48,12 @@ def login():
 
     users_login = crud.get_player_by_username(username)
     
-    if users_login.password == password:
-        session['current_user'] = username
-        user_in_session = session['current_user']
-        flash(f'Nice to see you back, {user_in_session}!')
+    if users_login == None:
+        flash(f'Looks like you have not made an account yet!')
+        return redirect('/')
+    elif users_login.password == password:
+        session['current_user'] = users_login.user_id
+        flash(f'Nice to see you back, {users_login.username}!')
         return redirect('/nav')
     else:
         flash(f'The password you inputed for {users_login.username} is incorrect. Try again!')
@@ -68,38 +67,55 @@ def create_team():
 
 @app.route('/teams', methods=["POST"])
 def register_team():
-    #maybe their primary keys must match? make tables more indpendent?
-    #TODO: instead of creating a new city and sport each time, just have an immutable table for each
-    #and call them - for create user too then you will have to modify potential players 
-    #because the IDs will match up and you won't have to match the string names
-    #TODO: for park however, you can just create a new park if that park doesn't already exist in the table
-    #for that city
+    #TODO: add park portion thru ajax, such when a city is selected, only parks in that city show
     team_name = request.form.get('team_name')
     description = request.form.get('description')
-    city = request.form.get('cities')
-    team_city = crud.create_city(city) #change to crud.get_city(city)
+    city_id = request.form.get('cities')
+    team_city = crud.get_city_by_id(city_id) #change to crud.get_city(city)
     #create the sport
-    sport = request.form.get('sports')
-    team_sport = crud.create_sport(sport) #get_sport_by_id
+    sport_id = request.form.get('sports')
+    team_sport = crud.get_sport_by_id(sport_id) #get_sport_by_id
     #create park
     # park = request.form.get('park')
     # teams_park = crud.create_park(park, team_city)
+    # TODO: my_session = session['my_teams'][crud.get_team_by_id(team_id).team_id] assuming one user could 
+    # have already created a team
+    if crud.get_team_by_teamname(team_name):
+        flash(f'Sorry! That team name is already in use!')
+        return redirect('/createteam')
+    else:
+        my_team = crud.create_team(team_name, description, team_sport, team_city)
+        session['my_teams'] = my_team.team_id
+        flash(f'Your team {my_team.team_name} has been created!')
+        return redirect('/teams')
 
-    my_team = crud.create_team(team_name, description, team_sport, team_city)
-    # session['my_teams'] = my_team.team_name
-    flash(f'Your team {my_team.team_name} has been created!')
-    # flash(f'my session:{session}')
-    redirect('/nav')
+@app.route('/teams')
+def display_teams():
+    """ displays all teams"""
+    teams = crud.get_teams()
+    return render_template('teams.html', teams=teams)
+
+@app.route('/teams/<team_id>')
+def show_team(team_id):
+    """Show details of a particular team """
+    team = crud.get_team_by_id(team_id)
+    return render_template('team_details.html', team=team)
+
+@app.route('/users/<user_id>')
+def show_player(user_id):
+    """Show details of a particular player """
+    player = crud.get_player_by_id(user_id)
+    return render_template('user_details.html', player=player)
 
 @app.route('/users', methods=["POST"])
 def register_user():
     """create user and adds them to the database"""
     #create city
-    city = request.form.get('cities')
-    c = crud.create_city(city) 
+    city_id = request.form.get('cities')
+    c = crud.get_city_by_id(city_id) 
     #create sport
-    sport = request.form.get('sports')
-    s = crud.create_sport(sport)
+    sport_id = request.form.get('sports')
+    s = crud.get_sport_by_id(sport_id)
     
     #create player
     username = request.form.get('username')
