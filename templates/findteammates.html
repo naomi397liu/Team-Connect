@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Potential Teammates{% endblock %}
+
+{% block head %}Potential Teammates{% endblock %}
+
+  {% block body %}
+  <ul>
+    {% for potential in potentials %}
+      <li>
+          <h4>{{potential.username}}:</h4><br>
+          {{potential.sport.sport_name}}<br>
+          {{potential.city.city_name}}
+        
+      </li>
+    {% endfor %}
+  </ul>
+  {% endblock %}

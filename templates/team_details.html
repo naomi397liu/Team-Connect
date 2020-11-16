@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Team: {{team.team_name}}{% endblock %}
+
+{% block head %}Team: {{team.team_name}} {% endblock %}
+
+  {% block body %}
+          <h2>{{team.team_name}}:</h2><br>
+          {{team.sport.sport_name}}<br>
+          {{team.city.city_name}}<br>
+          {{team.description}}
+        
+  
+  {% endblock %}

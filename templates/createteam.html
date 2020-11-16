@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Create Team{% endblock %}
+
+{% block head %}Create Team{% endblock %}
+
+  {% block body %}
+    <form action="/teams" method="POST">
+      
+      Team name: <input type="text" name="team_name"><br><br>
+
+      Sport: <br>
+      <select name="sports" id="sports">
+        <option value=1>Soccer</option>
+        <option value=2>Basketball</option>
+        <option value=3>Volleyball</option>
+      </select>
+        <br><br>
+
+      City: <br>
+      <select name="cities" id="cities">
+          <option value="1">San Francisco</option>
+          <option value="2">Sacramento</option>
+          <option value="3">Los Angeles</option>
+      </select>
+      
+      <br><br>
+      Description & Details:
+      <input type="text" name="description"><br>
+      <br>
+      <input type="submit" value="Create Team"><br>
+    </form>
+
+  {% endblock %}
