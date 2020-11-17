@@ -5,12 +5,13 @@
 
   {% block body %}
           <h2>{{team.team_name}}:</h2><br>
-          {{team.sport.sport_name}}<br>
-          {{team.city.city_name}}<br>
-          {{team.description}}
-
+          Sport: {{team.sport.sport_name}}<br>
+          City: {{team.city.city_name}}<br>
+          Team's Description: {{team.description}}
+          
           <li>{% for player in players %}
-            {{player}}
+            <a href="/users/{{ player.user.user_id }}">
+                {{player.user.username}} </a>
             {% endfor %}
         </li>
             
