@@ -3,12 +3,15 @@
 
 {% block head %}Team: {{team.team_name}} {% endblock %}
 
+<script src="/static/Add_player.js"></script>
+<script src="http://code.jquery.com/jquery.js"></script>
   {% block body %}
           <h2>{{team.team_name}}:</h2><br>
           Sport: {{team.sport.sport_name}}<br>
           City: {{team.city.city_name}}<br>
-          Team's Description: {{team.description}}
-          
+          Team's Description: {{team.description}}<br><br>
+
+          <h3>Players</h3> <button type="submit" id="add-player">Join Team</button>
           <li>{% for player in players %}
             <a href="/users/{{ player.user.user_id }}">
                 {{player.user.username}} </a>
