@@ -72,6 +72,19 @@ class Team(db.Model):
         return f'<Team team_id={self.team_id} team_name={self.team_name}>'
 
 
+class Player(db.Model):
+    """Contains all the players for a given team, many to many relationship/join table"""
+    __tablename__ = 'player'
+    player_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    team_id = db.Column(db.Integer, db.ForeignKey('teams.team_id'))
+
+    user = db.relationship('User', backref='teams_players')
+    team = db.relationship('Team', backref='teams_players')
+
+    def __repr__(self):
+        return f'<Player player_id={self.player_id} user={self.user.username} team={self.team.team_name}>'
 #database name = games, called with psql
 def connect_to_db(flask_app, db_uri='postgresql:///games', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri

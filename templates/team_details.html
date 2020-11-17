@@ -8,6 +8,12 @@
           {{team.sport.sport_name}}<br>
           {{team.city.city_name}}<br>
           {{team.description}}
-        
+
+          <li>{% for player in players %}
+            {{player}}
+            {% endfor %}
+        </li>
+            
+
   
   {% endblock %}

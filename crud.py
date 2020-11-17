@@ -1,6 +1,6 @@
 """ functions to create tables and filter/query them """
 
-from model import db, User, Sport, Park, City, Team, connect_to_db
+from model import db, User, Sport, Park, City, Team, Player, connect_to_db
 from datetime import datetime, time
 
 # creating data:
@@ -24,6 +24,10 @@ def get_players_by_sport(sport_obj):
             teammates.append(player)
 
     return teammates
+
+def get_teams_players(team):
+    """Takes in a team object and outputs all the players for that team """
+    return Player.query.filter_by(team = team).all()
 
 def get_players_by_city(city_obj):
     """ takes in a city_name from db and outputs a list of players with that city_name"""
@@ -98,6 +102,14 @@ def create_team(name, description, sport, city):
     db.session.commit()
 
     return team
+
+def create_team_player(user, team):
+    """creates a player by taking in a user object and team object to make a user a member of a team"""
+    player = Player(user=user, team=team)
+    db.session.add(player)
+    db.session.commit()
+
+    return player
 
 def create_park(park_name, city):
     """ takes in a park name & city from city table it is in and adds it to the park table """

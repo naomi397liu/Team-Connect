@@ -41,6 +41,8 @@ for num in range(22):
     city = crud.get_city_by_id(randint(1,len(sports)))
     crud.create_player(username, password, bio, sport, city)
 
+crud.create_team('Killers', 'Play to win', crud.get_sport_by_id(1), crud.get_city_by_id(1))
+crud.create_team_player(crud.get_player_by_id(1), crud.get_team_by_id(1))
 #creates myuser:
 
 # POPULATE CITIES TABLE AND SPORT TABLE

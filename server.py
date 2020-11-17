@@ -99,7 +99,8 @@ def display_teams():
 def show_team(team_id):
     """Show details of a particular team """
     team = crud.get_team_by_id(team_id)
-    return render_template('team_details.html', team=team)
+    players = crud.get_teams_players(team)
+    return render_template('team_details.html', team=team, players=players)
 
 @app.route('/users/<user_id>')
 def show_player(user_id):
