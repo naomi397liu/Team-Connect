@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, flash, redirect, session
+from flask import Flask, request, render_template, flash, redirect, session, jsonify
 import crud
 from jinja2 import StrictUndefined
 from model import connect_to_db
@@ -39,6 +39,13 @@ def search():
 def navigate():
     """ Show Navigation page """
     return render_template("nav.html")
+
+@app.route('/add')
+def add_player():
+    user = crud.get_player_by_id(session['current_user'])
+    team = crud.get_team_by_id(session['current_team'])
+    new_player = crud.create_team_player(user, team)
+    return jsonify(new_player)
 
 @app.route('/login')
 def login():
@@ -100,6 +107,7 @@ def show_team(team_id):
     """Show details of a particular team """
     team = crud.get_team_by_id(team_id)
     players = crud.get_teams_players(team)
+    session['current_team'] = team_id #stores the team id of the current team page user in on
     return render_template('team_details.html', team=team, players=players)
 
 @app.route('/users/<user_id>')

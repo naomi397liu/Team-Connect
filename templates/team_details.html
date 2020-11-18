@@ -3,20 +3,39 @@
 
 {% block head %}Team: {{team.team_name}} {% endblock %}
 
-<script src="/static/Add_player.js"></script>
-<script src="http://code.jquery.com/jquery.js"></script>
+
+<script type=text/javascript>
+    $.getJSON('/add', (reponse) => {
+        players.append(new_player.username)
+    })
+        $("#add-player").click(function(){
+            alert('You are now on the team!')
+            $.getJSON('/add', function(data) {
+                $("#new-player").text(data.new_player);
+            });
+            
+            return false;
+         });
+    });
+
+</script>
+
   {% block body %}
           <h2>{{team.team_name}}:</h2><br>
           Sport: {{team.sport.sport_name}}<br>
           City: {{team.city.city_name}}<br>
           Team's Description: {{team.description}}<br><br>
+        <button type="button" id="add-player">Join Team</button>
+          <h3>Players</h3> 
 
-          <h3>Players</h3> <button type="submit" id="add-player">Join Team</button>
-          <li>{% for player in players %}
-            <a href="/users/{{ player.user.user_id }}">
-                {{player.user.username}} </a>
-            {% endfor %}
-        </li>
+          <ul>
+              <div id=new-player></div>
+            <li> {% for player in players %}
+                <a href="/users/{{ player.user.user_id }}">
+                    {{player.user.username}} </a>
+                {% endfor %}
+            </li>
+        </ul>
             
 
   
