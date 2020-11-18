@@ -30,11 +30,12 @@
 
           <ul>
               <div id=new-player></div>
-            <li> {% for player in players %}
+              {% for player in players %}
+            <li> 
                 <a href="/users/{{ player.user.user_id }}">
                     {{player.user.username}} </a>
-                {% endfor %}
             </li>
+            {% endfor %}
         </ul>
             
 
