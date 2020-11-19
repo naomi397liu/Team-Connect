@@ -107,8 +107,8 @@ def create_team(name, description, sport, city):
 def create_team_player(user, team):
     """creates a player by taking in a user object and team object to make a user a member of a team
     if the user is not already part of the team"""
-    if Player.query.filter_by(user = user).all():
-        player = Player.query.filter_by(user = user).all()
+    if Player.query.filter_by(user = user).first():
+        player = Player.query.filter_by(user = user).first()
     else:
         player = Player(user=user, team=team)
         db.session.add(player)

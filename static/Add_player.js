@@ -4,14 +4,17 @@
 // or maybe just allow a user to remove themself
 function alertFunction(evt){
     $.get('/add.json', (data) => {
-        // if (data[0] in data[3]){
+        if (data[2]){
         const res = $(`<li><a href="/users/${data[1]}">${data[0]}</a></li>`);
         $('#player-list').append(res);
-        alert(`Welcome to the team, ${data[0]}!`);
-        // }else{
-        //     alert(`You're already on the team!`)
-        // }   
+        alert(`Welcome to the team, ${data[0]} unique ${data[2]}!`);
+        }else if (data[2] == false){
+            alert(`You're already on the team!`)
+        }   
     });
+    // Keeps going into else!! ie data[2] is always false, but it is adding to the team
+
+
     // $('#add-player').on('click', (evt) => {
     //     const btn = $(evt.target);
       

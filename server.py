@@ -46,9 +46,14 @@ def add_player():
     team_id = session['current_team']
     user = crud.get_player_by_id(user_id)
     team = crud.get_team_by_id(team_id)
+    # if crud.is_new_player(user,team):
+    #     is_new = True
+    # else:
+    #     is_new = 'old'
     new_player = crud.create_team_player(user, team) 
-    # new_player = new_player.user.username
-    return jsonify(new_player, user_id)
+    new_player = new_player.user.username
+
+    return jsonify(new_player, user_id, crud.is_new_player(user,team))
    
 
 @app.route('/login')
