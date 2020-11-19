@@ -2,13 +2,11 @@
 
 function alertFunction(evt){
     $.get('/add.json', (data) => {
-        const res = $(`<li>${data}</li>`);
+        const res = $(`<li><a href="/users/${data[1]}">${data[0]}</a></li>`);
         $('#player-list').append(res);
-        // $('#new-player').html(res);
-        alert(`You have been you have been added to the team!`);
+        alert(`You have been you have been added to the team`);
     });
 };
-
 
 // function addPlayer(evt) {
 //     evt.preventDefault();
