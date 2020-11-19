@@ -40,11 +40,14 @@ def navigate():
     """ Show Navigation page """
     return render_template("nav.html")
 
-@app.route('/add')
+@app.route('/add.json')
 def add_player():
-    user = crud.get_player_by_id(session['current_user'])
-    team = crud.get_team_by_id(session['current_team'])
-    new_player = crud.create_team_player(user, team)
+    user_id = session['current_user']
+    team_id = session['current_team']
+    user = crud.get_player_by_id(user_id)
+    team = crud.get_team_by_id(team_id)
+    new_player = crud.create_team_player(user, team) #players is a list of objs
+    new_player = new_player.user.username
     return jsonify(new_player)
 
 @app.route('/login')
