@@ -1,11 +1,26 @@
 "use strict"
 
+// TODO: make sure that the same user cannot add themselves multiple times
+// or maybe just allow a user to remove themself
 function alertFunction(evt){
     $.get('/add.json', (data) => {
+        // if (data[0] in data[3]){
         const res = $(`<li><a href="/users/${data[1]}">${data[0]}</a></li>`);
         $('#player-list').append(res);
-        alert(`You have been you have been added to the team`);
+        alert(`Welcome to the team, ${data[0]}!`);
+        // }else{
+        //     alert(`You're already on the team!`)
+        // }   
     });
+    // $('#add-player').on('click', (evt) => {
+    //     const btn = $(evt.target);
+      
+    //     if (btn.html() === 'Join Team') {
+    //       btn.html('Leave Team');
+    //     } else {
+    //       btn.html('Join Team');
+    //     }
+    //   });
 };
 
 // function addPlayer(evt) {

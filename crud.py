@@ -29,6 +29,8 @@ def get_teams_players(team):
     """Takes in a team object and outputs all the players for that team """
     return Player.query.filter_by(team = team).all()
 
+
+
 def get_players_by_city(city_obj):
     """ takes in a city_name from db and outputs a list of players with that city_name"""
     #TODO: user SQL filter_by to do this 
@@ -80,7 +82,6 @@ def create_sport(sport_name):
 #3
 def create_player(user, pw, bio, sport, city):
     """ creates a new player's profile """
-   
     user = User(username=user, password=pw, bio=bio, sport=sport, city=city)
     db.session.add(user)
     db.session.commit()
@@ -104,12 +105,23 @@ def create_team(name, description, sport, city):
     return team
 
 def create_team_player(user, team):
-    """creates a player by taking in a user object and team object to make a user a member of a team"""
-    player = Player(user=user, team=team)
-    db.session.add(player)
-    db.session.commit()
+    """creates a player by taking in a user object and team object to make a user a member of a team
+    if the user is not already part of the team"""
+    if Player.query.filter_by(user = user).all():
+        player = Player.query.filter_by(user = user).all()
+    else:
+        player = Player(user=user, team=team)
+        db.session.add(player)
+        db.session.commit()
 
     return player
+
+def is_new_player(user, team):
+    """checks to see if this user is already a player of the team, returns T/F"""
+    if Player.query.filter_by(user = user).all():
+        return False
+    else:
+        return True
 
 def create_park(park_name, city):
     """ takes in a park name & city from city table it is in and adds it to the park table """

@@ -46,9 +46,10 @@ def add_player():
     team_id = session['current_team']
     user = crud.get_player_by_id(user_id)
     team = crud.get_team_by_id(team_id)
-    new_player = crud.create_team_player(user, team) #players is a list of objs
-    new_player = new_player.user.username
+    new_player = crud.create_team_player(user, team) 
+    # new_player = new_player.user.username
     return jsonify(new_player, user_id)
+   
 
 @app.route('/login')
 def login():
