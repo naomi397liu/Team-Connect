@@ -1,15 +1,24 @@
 {% extends 'base.html' %}
-{% block title %}Player: {{player.username}}{% endblock %}
+{% block title %}User: {{user_profile.username}}{% endblock %}
 
-{% block head %}Player: {{player.username}}{% endblock %}
+{% block head %}User: {{user_profile.username}}{% endblock %}
 
   {% block body %}
-          <h2>{{player.username}}:</h2><br>
-          {{player.sport.sport_name}}<br>
-          {{player.city.city_name}}<br>
-          {{player.bio}}
-        {% if current_user_team == players_team}
-            phone: {{phone}}
+          <h2>{{user_profile.username}}:</h2><br>
+         <h4>My Sport: <br>
+            {{user_profile.sport.sport_name}}</h4>
+          <h4> My city:  <br>
+            {{user_profile.city.city_name}}</h4> 
+            <h4>About me: <br>
+            {{user_profile.bio}} </h4>
+        {% if shared_teams %}
+            {% for player in players %}
+            <div>
+                <ul>Team: {{player.team.team_name}} 
+                    <ul>{{player.phone}} </ul>
+                </ul>
+            </div>
+            {% endfor %}
         {% endif %}
   
   {% endblock %}

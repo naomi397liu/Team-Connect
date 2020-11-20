@@ -56,6 +56,9 @@ player4 = crud.create_team_player(d, crud.get_player_by_id(1), crud.get_team_by_
 crud.create_team('Wombats', 'Best D, greatest offense', crud.get_sport_by_id(2), crud.get_city_by_id(2))
 player5 = crud.create_team_player(a, crud.get_player_by_id(1), crud.get_team_by_id(2))
 player6 = crud.create_team_player(e, crud.get_player_by_id(4), crud.get_team_by_id(2))
+
+crud.create_team('Aggies', 'Farm for Fun', crud.get_sport_by_id(3), crud.get_city_by_id(3))
+
 #creates myuser:
 
 # POPULATE CITIES TABLE AND SPORT TABLE
@@ -64,3 +67,11 @@ player6 = crud.create_team_player(e, crud.get_player_by_id(4), crud.get_team_by_
 parks = ['Doloris', 'Lincoln', 'Hermosa']
 
 
+user1 = crud.get_player_by_id(1)
+my_user = crud.get_player_by_id(3)
+if (crud.is_player(user1)) and (crud.is_player(my_user)): #both false
+    users_teams = crud.get_players_teams(user1) #team objects in a set
+#check if the current user is a player and get current users team ids in a set
+    my_users_teams = crud.get_players_teams(my_user)
+#check for set overlap: if user and current user share a same team id then get users phone number
+    shared_teams = users_teams & my_users_teams

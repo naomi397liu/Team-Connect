@@ -1,5 +1,6 @@
 """ functions to create tables and filter/query them """
-
+# TODO: change function names that pertain to user, to use 'user' in the name and change function names that pertain
+# to a player to use 'player' in the function names
 from model import db, User, Sport, Park, City, Team, Player, connect_to_db
 from datetime import datetime, time
 
@@ -118,15 +119,23 @@ def create_team_player(phone, user, team):
 
     return player
 
-def get_players_teams(player):
-    
-    p = Player.query.filter_by(user = player).first()
-    return p.team
+def get_player_by_user_team(user, team):
+    """ Takes in an object team and object user and outputs the unique player object"""
+    player = Player.query.filter_by(user = user, team = team).first()
+
+    return player
+
+def get_players_teams(user):
+    """takes in an object user and outputs the team objects in a set for that user"""
+    list_teams = Player.query.filter_by(user = user ).all()
+    teams = set()
+    for list_team in list_teams:
+        teams.add(list_team.team)
+    return teams
 
 def is_player(user):
     """Takes in a user object and returns False if the user is not a player"""
-    if Player.query.filter_by(user=user).all() == []:
-        return False
+    return Player.query.filter_by(user=user).all() != []
 
 def get_teams_players(team):
     """Takes in a team object and outputs all the players for that team """

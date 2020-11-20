@@ -1,3 +1,5 @@
+#TODO:add asset for profile pictures
+
 from flask import Flask, request, render_template, flash, redirect, session, jsonify
 import crud
 from jinja2 import StrictUndefined
@@ -122,8 +124,22 @@ def show_team(team_id):
 @app.route('/users/<user_id>')
 def show_player(user_id):
     """Show details of a particular player """
-    player = crud.get_player_by_id(user_id)
-    return render_template('user_details.html', player=player)
+    #if user is player then get their user id and put their team ids in a set
+    user_profile = crud.get_player_by_id(user_id)
+    my_user = crud.get_player_by_id(session['current_user'])
+    if (crud.is_player(user_profile)) and (crud.is_player(my_user)):
+        users_teams = crud.get_players_teams(user_profile) #team objects in a set
+    #check if the current user is a player and get current users team ids in a set
+        my_users_teams = crud.get_players_teams(my_user)
+    #check for set overlap: if user and current user share a same team id then get users phone number
+        shared_teams = users_teams & my_users_teams
+    #else make phone number a str: 'Sorry but you're not teammates yet!
+    #pass the str into the rendered page
+    #get player obj from team
+        players =[]
+        for shared_team in shared_teams:
+            players.append(crud.get_player_by_user_team(user_profile, shared_team))
+    return render_template('user_details.html', user_profile = user_profile, shared_teams=shared_teams, players=players)
 
 @app.route('/users', methods=["POST"])
 def register_user():

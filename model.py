@@ -71,7 +71,8 @@ class Team(db.Model):
     def __repr__(self):
         return f'<Team team_id={self.team_id} team_name={self.team_name}>'
 
-
+# Player is defined as a user on a team. If the same user wants to be on 3 teams for example, then they would
+# be 3 players, one for each team but they would all share the same object user
 class Player(db.Model):
     """Contains all the players for a given team, many to many relationship/join table"""
     __tablename__ = 'players'
