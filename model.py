@@ -76,6 +76,7 @@ class Player(db.Model):
     """Contains all the players for a given team, many to many relationship/join table"""
     __tablename__ = 'player'
     player_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    phone = db.Column(db.String, unique=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     team_id = db.Column(db.Integer, db.ForeignKey('teams.team_id'))

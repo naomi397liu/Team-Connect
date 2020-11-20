@@ -44,17 +44,23 @@ def navigate():
 def add_player():
     user_id = session['current_user']
     team_id = session['current_team']
+    phone = session['user_phone']
     user = crud.get_player_by_id(user_id)
     team = crud.get_team_by_id(team_id)
-    # if crud.is_new_player(user,team):
-    #     is_new = True
-    # else:
-    #     is_new = 'old'
-    new_player = crud.create_team_player(user, team) 
+    if crud.is_new_player(user,team):
+        x = 'new player!'
+    else:
+        x = 'already player!'
+    new_player = crud.create_team_player(phone, user, team) 
     new_player = new_player.user.username
 
-    return jsonify(new_player, user_id, crud.is_new_player(user,team))
-   
+    return jsonify(new_player, user_id, x)
+
+@app.route('/phone')
+def get_phone():
+    phone = request.args.get('phone')
+    session['user_phone'] = phone
+    return None
 
 @app.route('/login')
 def login():
