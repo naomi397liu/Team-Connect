@@ -143,7 +143,7 @@ def get_teams_players(team):
 
 def is_new_player(user, team):
     """checks to see if this user is already a player of the team, returns T/F"""
-    if Player.query.filter_by(user = user).first():
+    if Player.query.filter_by(user = user, team = team).first():
         return False
     else:
         return True
