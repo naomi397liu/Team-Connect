@@ -74,15 +74,15 @@ class Team(db.Model):
 
 class Player(db.Model):
     """Contains all the players for a given team, many to many relationship/join table"""
-    __tablename__ = 'player'
+    __tablename__ = 'players'
     player_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    phone = db.Column(db.String, unique=True)
+    phone = db.Column(db.String)
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     team_id = db.Column(db.Integer, db.ForeignKey('teams.team_id'))
 
-    user = db.relationship('User', backref='teams_players')
-    team = db.relationship('Team', backref='teams_players')
+    user = db.relationship('User', backref='players')
+    team = db.relationship('Team', backref='players')
 
     def __repr__(self):
         return f'<Player player_id={self.player_id} user={self.user.username} team={self.team.team_name}>'

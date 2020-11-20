@@ -11,11 +11,12 @@
           Team's Description: {{team.description}}<br><br>
        
           <h3>Players</h3>
-          <form>
+          <form action='/add.json'>
+            <label for="phone">What is the best phone number for your teammates to reach you at?</label>
             <input type="text" name="phone">
-          
-          <button id="add-player" onclick="alertFunction()">Join Team</button>
         </form> 
+          <button id="add-player" onclick="alertFunction()">Join Team</button>
+        
           
           <ul id="player-list">
             <div id="new-player"></div>

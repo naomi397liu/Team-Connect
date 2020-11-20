@@ -8,6 +8,8 @@
           {{player.sport.sport_name}}<br>
           {{player.city.city_name}}<br>
           {{player.bio}}
-        
+        {% if current_user_team == players_team}
+            phone: {{phone}}
+        {% endif %}
   
   {% endblock %}

@@ -108,14 +108,25 @@ def get_team_by_teamname(name):
 def create_team_player(phone, user, team):
     """creates a player by taking in a user object and team object to make a user a member of a team
     if the user is not already part of the team"""
-    if Player.query.filter_by(user = user).first():
-        player = Player.query.filter_by(user = user).first()
+    # if the user is already a player on that TEAM
+    if Player.query.filter_by(user = user, team=team).first():
+        player = Player.query.filter_by(user = user, team = team).first()
     else:
         player = Player(phone=phone, user=user, team=team)
         db.session.add(player)
         db.session.commit()
 
     return player
+
+def get_players_teams(player):
+    
+    p = Player.query.filter_by(user = player).first()
+    return p.team
+
+def is_player(user):
+    """Takes in a user object and returns False if the user is not a player"""
+    if Player.query.filter_by(user=user).all() == []:
+        return False
 
 def get_teams_players(team):
     """Takes in a team object and outputs all the players for that team """
