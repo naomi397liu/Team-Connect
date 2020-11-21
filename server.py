@@ -30,11 +30,11 @@ def search():
     potentials = []
     sport_potentials = crud.get_players_by_sport(profile.sport)
     city_potentials = crud.get_players_by_city(profile.city)
-    players = crud.get_players()
+    users = crud.get_players()
     #check all players for matches
-    for player in players:
-        if (player in city_potentials) and (player in sport_potentials):
-            potentials.append(player)
+    for user in users:
+        if (user in city_potentials) and (user in sport_potentials):
+            potentials.append(user)
     return render_template('findteammates.html', potentials=potentials)
 
 @app.route('/nav')
@@ -139,6 +139,9 @@ def show_player(user_id):
         players =[]
         for shared_team in shared_teams:
             players.append(crud.get_player_by_user_team(user_profile, shared_team))
+    else:
+        shared_teams = None
+        players = None
     return render_template('user_details.html', user_profile = user_profile, shared_teams=shared_teams, players=players)
 
 @app.route('/users', methods=["POST"])

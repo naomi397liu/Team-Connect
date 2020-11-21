@@ -7,11 +7,12 @@
   <ul>
     {% for potential in potentials %}
       <li>
-          <h4>{{potential.username}}:</h4><br>
-          {{potential.sport.sport_name}}<br>
-          {{potential.city.city_name}}
+          <a href="/users/{{ potential.user_id }}">
+            {{ potential.username }} </a>
         
       </li>
     {% endfor %}
   </ul>
   {% endblock %}
+
+  

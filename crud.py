@@ -134,7 +134,7 @@ def get_players_teams(user):
     return teams
 
 def is_player(user):
-    """Takes in a user object and returns False if the user is not a player"""
+    """Takes in a user object and returns False if the user is not a player of any team"""
     return Player.query.filter_by(user=user).all() != []
 
 def get_teams_players(team):
