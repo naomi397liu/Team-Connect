@@ -100,7 +100,12 @@ def register_team():
     # teams_park = crud.create_park(park, team_city)
     # TODO: my_session = session['my_teams'][crud.get_team_by_id(team_id).team_id] assuming one user could 
     # have already created a team
-    if crud.get_team_by_teamname(team_name):
+    if crud.is_captain(captain):
+        team = crud.which_captain(captain).team
+        players = crud.get_teams_players(team)
+        flash(f'Sorry, but you already have a team that you are a captain of!')
+        return render_template('team_details.html', team=team, players=players)
+    elif crud.get_team_by_teamname(team_name):
         flash(f'Sorry! That team name is already in use!')
         return redirect('/createteam')
     else:
