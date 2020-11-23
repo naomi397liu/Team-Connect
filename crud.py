@@ -84,9 +84,9 @@ def get_player_by_id(num):
     return User.query.filter_by(user_id = num).first()
 
 #TEAM QUERIES
-def create_team(name, description, sport, city):
+def create_team(name, description, user, sport, city):
     """ creates a team and takes in a team name, desciption, sport from table, city from table and park from table"""
-    team = Team(team_name=name, description=description, sport=sport, city=city)
+    team = Team(team_name=name, description=description, captain=user, sport=sport, city=city)
     db.session.add(team)
     db.session.commit()
 
@@ -118,6 +118,23 @@ def create_team_player(phone, user, team):
         db.session.commit()
 
     return player
+
+# def find_team_captain(user, team):
+#     """Takes in the object user and object team to find the object player who is the team captain"""
+def is_captain(user):
+"""Find out if the user is a team captain. Right now a user can only create one team"""
+    if is_player(user):
+        users_teams = get_players_teams(user):
+        for team in users_teams:
+            if user == get_user_by_id(team.captain):
+                return True
+            else:
+                return False
+
+    else: 
+        return is_player(user)
+
+
 
 def get_player_by_user_team(user, team):
     """ Takes in an object team and object user and outputs the unique player object"""

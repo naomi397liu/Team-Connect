@@ -47,17 +47,17 @@ c = fake.phone_number()
 d = fake.phone_number()
 e = fake.phone_number()
 
-crud.create_team('Killers', 'Play to win', crud.get_sport_by_id(1), crud.get_city_by_id(1))
+team1 = crud.create_team('Killers', 'Play to win',crud.get_player_by_id(3), crud.get_sport_by_id(1), crud.get_city_by_id(1))
 player1 = crud.create_team_player(a, crud.get_player_by_id(1), crud.get_team_by_id(1))
 player2 = crud.create_team_player(b, crud.get_player_by_id(3), crud.get_team_by_id(1))
 player3 = crud.create_team_player(c, crud.get_player_by_id(2), crud.get_team_by_id(1))
 player4 = crud.create_team_player(d, crud.get_player_by_id(1), crud.get_team_by_id(1))
 
-crud.create_team('Wombats', 'Best D, greatest offense', crud.get_sport_by_id(2), crud.get_city_by_id(2))
+team2 = crud.create_team('Wombats', 'Best D, greatest offense', crud.get_player_by_id(4),crud.get_sport_by_id(2), crud.get_city_by_id(2))
 player5 = crud.create_team_player(a, crud.get_player_by_id(1), crud.get_team_by_id(2))
 player6 = crud.create_team_player(e, crud.get_player_by_id(4), crud.get_team_by_id(2))
 
-crud.create_team('Aggies', 'Farm for Fun', crud.get_sport_by_id(3), crud.get_city_by_id(3))
+team3 = crud.create_team('Aggies', 'Farm for Fun', crud.get_player_by_id(5),crud.get_sport_by_id(3), crud.get_city_by_id(3))
 
 #creates myuser:
 

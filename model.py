@@ -60,10 +60,12 @@ class Team(db.Model):
     team_name = db.Column(db.String, unique=True)
     description = db.Column(db.String)
     
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     sport_id = db.Column(db.Integer, db.ForeignKey('sports.sport_id')) #sports=tablename
     city_id = db.Column(db.Integer, db.ForeignKey('cities.city_id')) #sports_id=thing we want from table
     # park_id = db.Column(db.Integer, db.ForeignKey('parks.park_id'))
 
+    captain = db.relationship('User', backref='teams')
     sport = db.relationship('Sport', backref='teams') #Sport=class referenced
     city = db.relationship('City', backref='teams')
     # park = db.relationship('Park', backref='teams')

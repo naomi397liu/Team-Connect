@@ -89,7 +89,9 @@ def register_team():
     team_name = request.form.get('team_name')
     description = request.form.get('description')
     city_id = request.form.get('cities')
+    phone = request.form.get('phone')
     team_city = crud.get_city_by_id(city_id) #change to crud.get_city(city)
+    captain = crud.get_player_by_id(session['current_user'])
     #create the sport
     sport_id = request.form.get('sports')
     team_sport = crud.get_sport_by_id(sport_id) #get_sport_by_id
@@ -102,8 +104,10 @@ def register_team():
         flash(f'Sorry! That team name is already in use!')
         return redirect('/createteam')
     else:
-        my_team = crud.create_team(team_name, description, team_sport, team_city)
+        my_team = crud.create_team(team_name, description, captain, team_sport, team_city)
         session['my_teams'] = my_team.team_id
+        crud.create_team_player(phone, captain, crud.get_team_by_id(session['my_teams']))
+    
         flash(f'Your team {my_team.team_name} has been created!')
         return redirect('/teams')
 
