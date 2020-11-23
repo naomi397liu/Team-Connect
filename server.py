@@ -143,9 +143,15 @@ def show_player(user_id):
         players =[]
         for shared_team in shared_teams:
             players.append(crud.get_player_by_user_team(user_profile, shared_team))
+    elif crud.is_captain(user_profile):
+        player_captain = crud.which_captain(user_profile)
+        players = [player_captain]
+        shared_teams = [player_captain.team]
     else:
         shared_teams = None
         players = None
+
+    
     return render_template('user_details.html', user_profile = user_profile, shared_teams=shared_teams, players=players)
 
 @app.route('/users', methods=["POST"])

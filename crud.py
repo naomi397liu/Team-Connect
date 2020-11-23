@@ -122,11 +122,11 @@ def create_team_player(phone, user, team):
 # def find_team_captain(user, team):
 #     """Takes in the object user and object team to find the object player who is the team captain"""
 def is_captain(user):
-"""Find out if the user is a team captain."""
+    """Find out if the user is a team captain."""
     if is_player(user):
-        users_teams = get_players_teams(user):
+        users_teams = get_players_teams(user)
         for team in users_teams:
-            if user == get_user_by_id(team.captain):
+            if user == team.captain:
                 return True
             else:
                 return False
@@ -137,10 +137,10 @@ def is_captain(user):
 def which_captain(user):
     """if you know a user is a captain, get object player. Right now a user can only create one team
     so this will always return a single object"""
-    users_teams = get_players_teams(user):
-        for team in users_teams:
-            if user == get_user_by_id(team.captain):
-                return get_player_by_user_team(user, team)
+    users_teams = get_players_teams(user)
+    for team in users_teams:
+        if user == team.captain:
+            return get_player_by_user_team(user, team)
 
 def get_player_by_user_team(user, team):
     """ Takes in an object team and object user and outputs the unique player object"""
