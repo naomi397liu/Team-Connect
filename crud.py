@@ -110,8 +110,8 @@ def remove_player(player):
     db.session.delete(player)
     db.session.commit()
     
-    return
-    
+    return player
+
 def create_team_player(phone, user, team):
     """creates a player by taking in a user object and team object to make a user a member of a team
     if the user is not already part of the team"""

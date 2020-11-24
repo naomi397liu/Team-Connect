@@ -50,14 +50,18 @@ def add_player():
     user = crud.get_player_by_id(user_id)
     team = crud.get_team_by_id(team_id)
     if crud.is_new_player(user,team):
+        new_player = crud.create_team_player(phone, user, team) 
+        new_player = new_player.user.username
         x = 'new player!'
+        return jsonify(new_player, user_id, x)
     else:
-        
-        x = 'already player!'
-    new_player = crud.create_team_player(phone, user, team) 
-    new_player = new_player.user.username
-
-    return jsonify(new_player, user_id, x)
+        if crud.is_captain(user):
+            pass
+        else:
+            crud.remove_player(crud.create_team_player(phone, user, team))
+            new_player = user.username
+            x = 'removed player!'
+            return jsonify(new_player, user_id, x)
 
 @app.route('/login')
 def login():

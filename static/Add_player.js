@@ -8,14 +8,18 @@ $('#add-player').on('click', (evt) => {
     const btn = $(evt.target);
 
     $.get('/add.json', (data) => {
-        if(btn.html() === 'Join Team'){
+        if(btn.html() === 'Join Team' && x === 'new player!'){
             const res = $(`<li><a href="/users/${data[1]}">${data[0]}</a></li>`);
             $('#player-list').append(res);
             alert(`Welcome to the team, ${data[0]}!`); 
             btn.html('Leave Team');
-        }else if (btn.html() === 'Leave Team'){
-            // btn.html('Leave Team')
-            alert(`${data[2]}`)
+        }else (btn.html() === 'Leave Team' && x === 'removed player!')
+        {
+            alert(`You've been removed from the team!`)
+            // const res = $(`<li><a href="/users/${data[1]}">${data[0]}</a></li>`)
+            // index = $('#player-list').indexOf(res)
+            // $('#player-list').pop(index)
+            btn.html('Join Team')
         }
     });
     

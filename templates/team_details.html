@@ -1,10 +1,16 @@
-{% extends 'base.html' %}
-{% block title %}Team: {{team.team_name}}{% endblock %}
+<!doctype html>
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <title>
+      {% block title %}Team: {{team.team_name}}{% endblock %}
+    </title>
+    <h1>{% block head %}Team: {{team.team_name}}{% endblock %}</h1>
+  </head>
 
-{% block head %}Team: {{team.team_name}}
-{% endblock %}
+    <body id='body' onload="myFunction">
+    {% block body %}
 
-  {% block body %}
           <h2>{{team.team_name}}:</h2><br>
           Captain: {{team.captain.username}} <br>
           Sport: {{team.sport.sport_name}}<br>
@@ -34,4 +40,6 @@
             
         <script src="/static/Add_player.js"></script>
   
-  {% endblock %}
+    {% endblock %}
+    </body>
+</html>
