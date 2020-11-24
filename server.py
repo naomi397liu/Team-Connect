@@ -52,6 +52,7 @@ def add_player():
     if crud.is_new_player(user,team):
         x = 'new player!'
     else:
+        
         x = 'already player!'
     new_player = crud.create_team_player(phone, user, team) 
     new_player = new_player.user.username

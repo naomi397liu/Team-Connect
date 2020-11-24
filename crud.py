@@ -105,7 +105,13 @@ def get_team_by_teamname(name):
     return Team.query.filter_by(team_name = name).first()
 
 #TEAM PLAYER QUERIES
-
+def remove_player(player):
+    """Takes in the object user and removes them as a player from a given team"""
+    db.session.delete(player)
+    db.session.commit()
+    
+    return
+    
 def create_team_player(phone, user, team):
     """creates a player by taking in a user object and team object to make a user a member of a team
     if the user is not already part of the team"""

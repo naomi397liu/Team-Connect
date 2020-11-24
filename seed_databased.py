@@ -57,6 +57,7 @@ team2 = crud.create_team('Wombats', 'Best D, greatest offense', crud.get_player_
 player5 = crud.create_team_player(a, crud.get_player_by_id(1), crud.get_team_by_id(2))
 player6 = crud.create_team_player(e, crud.get_player_by_id(4), crud.get_team_by_id(2))
 
+
 team3 = crud.create_team('Aggies', 'Farm for Fun', crud.get_player_by_id(5),crud.get_sport_by_id(3), crud.get_city_by_id(3))
 
 #creates myuser:
