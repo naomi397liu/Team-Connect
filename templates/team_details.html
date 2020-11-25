@@ -3,14 +3,13 @@
   <head>
     <script src="http://code.jquery.com/jquery.js"></script>
     <title>
-      {% block title %}Team: {{team.team_name}}{% endblock %}
+      Team: {{team.team_name}}
     </title>
-    <h1>{% block head %}Team: {{team.team_name}}{% endblock %}</h1>
+    <h1>Team: {{team.team_name}}</h1>
+    <script src="/static/Add_player.js"></script>
   </head>
 
-    <body id='body' onload="myFunction">
-    {% block body %}
-
+    <body onload="myFunction()">
           <h2>{{team.team_name}}:</h2><br>
           Captain: {{team.captain.username}} <br>
           Sport: {{team.sport.sport_name}}<br>
@@ -22,7 +21,7 @@
             <label for="phone">What is the best phone number for your teammates to reach you at?</label>
             <input type="text" name="phone" required>
         </form> 
-          <button id="add-player">Join Team</button>
+          <button id="add-player" onclick="alertFunction()">Join Team</button>
         
           
           <ul id="player-list">
@@ -37,9 +36,8 @@
             {% endfor %}
           
         </ul>
-            
-        <script src="/static/Add_player.js"></script>
+        
   
-    {% endblock %}
+   
     </body>
 </html>

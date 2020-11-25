@@ -42,6 +42,20 @@ def navigate():
     """ Show Navigation page """
     return render_template("nav.html")
 
+app.route('/button.json')
+def switch_button():
+    """ Determines what the button label should read depending on if the user is a player already or not """
+    user_id = session['current_user']
+    team_id = session['current_team']
+    user = crud.get_player_by_id(user_id)
+    team = crud.get_team_by_id(team_id)
+    if crud.is_new_player(user,team):
+        x = 'new player!'
+    else:
+
+        x = 'already player!'
+    return jsonify(x)
+
 @app.route('/add.json')
 def add_player():
     user_id = session['current_user']
@@ -50,18 +64,14 @@ def add_player():
     user = crud.get_player_by_id(user_id)
     team = crud.get_team_by_id(team_id)
     if crud.is_new_player(user,team):
-        new_player = crud.create_team_player(phone, user, team) 
-        new_player = new_player.user.username
         x = 'new player!'
-        return jsonify(new_player, user_id, x)
     else:
-        if crud.is_captain(user):
-            pass
-        else:
-            crud.remove_player(crud.create_team_player(phone, user, team))
-            new_player = user.username
-            x = 'removed player!'
-            return jsonify(new_player, user_id, x)
+
+        x = 'already player!'
+    new_player = crud.create_team_player(phone, user, team) 
+    new_player = new_player.user.username
+    return jsonify(new_player, user_id, x)
+
 
 @app.route('/login')
 def login():

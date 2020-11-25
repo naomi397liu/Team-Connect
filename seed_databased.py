@@ -46,6 +46,7 @@ b = fake.phone_number()
 c = fake.phone_number()
 d = fake.phone_number()
 e = fake.phone_number()
+f = fake.phone_number()
 
 team1 = crud.create_team('Killers', 'Play to win',crud.get_player_by_id(3), crud.get_sport_by_id(1), crud.get_city_by_id(1))
 player1 = crud.create_team_player(a, crud.get_player_by_id(1), crud.get_team_by_id(1))
@@ -59,7 +60,7 @@ player6 = crud.create_team_player(e, crud.get_player_by_id(4), crud.get_team_by_
 
 
 team3 = crud.create_team('Aggies', 'Farm for Fun', crud.get_player_by_id(5),crud.get_sport_by_id(3), crud.get_city_by_id(3))
-
+player7 = crud.create_team_player(f, crud.get_player_by_id(5), crud.get_team_by_id(3))
 #creates myuser:
 
 # POPULATE CITIES TABLE AND SPORT TABLE
