@@ -9,7 +9,7 @@
     <script src="/static/Add_player.js"></script>
   </head>
 
-    <body onload="myFunction()">
+    <body>
           <h2>{{team.team_name}}:</h2><br>
           Captain: {{team.captain.username}} <br>
           Sport: {{team.sport.sport_name}}<br>
@@ -20,10 +20,13 @@
           <form action='/add.json'>
             <label for="phone">What is the best phone number for your teammates to reach you at?</label>
             <input type="text" name="phone" required>
+            <button id="add-player" onclick="alertFunction()" value=button_label>Join/Leave</button>
         </form> 
-          <button id="add-player" onclick="alertFunction()">Join Team</button>
+       
         
-          
+         
+        
+
           <ul id="player-list">
             <div id="new-player"></div>
             

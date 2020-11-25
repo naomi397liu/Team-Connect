@@ -49,12 +49,13 @@ def switch_button():
     team_id = session['current_team']
     user = crud.get_player_by_id(user_id)
     team = crud.get_team_by_id(team_id)
+    phone = request.args.get('phone') #changed
+
     if crud.is_new_player(user,team):
         x = 'new player!'
     else:
-
         x = 'already player!'
-    return jsonify(x)
+    return jsonify(x, phone)
 
 @app.route('/add.json')
 def add_player():
@@ -65,11 +66,15 @@ def add_player():
     team = crud.get_team_by_id(team_id)
     if crud.is_new_player(user,team):
         x = 'new player!'
+        new_player = crud.create_team_player(phone, user, team) 
+        new_player = new_player.user.username
     else:
-
         x = 'already player!'
-    new_player = crud.create_team_player(phone, user, team) 
-    new_player = new_player.user.username
+        current_player = crud.get_player_by_user_team(user,team)
+        crud.remove_player(current_player)
+        new_player = user.username
+    # new_player = crud.create_team_player(phone, user, team) 
+    # new_player = new_player.user.username
     return jsonify(new_player, user_id, x)
 
 
@@ -140,9 +145,11 @@ def display_teams():
 @app.route('/teams/<team_id>')
 def show_team(team_id):
     """Show details of a particular team """
+
     team = crud.get_team_by_id(team_id)
     players = crud.get_teams_players(team)
     session['current_team'] = team_id #stores the team id of the current team page user in on
+
     return render_template('team_details.html', team=team, players=players)
 
 @app.route('/users/<user_id>')
