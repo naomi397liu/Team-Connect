@@ -12,7 +12,6 @@
 - A user contains data on what their sport of interest is and their city
 - A team contains data on their sport, city and team captain AKA the creator of the team 
 - A player contains data on who the user is and what team they are a player of and phone number they can be contacted at.
-- Future versions may want to consider importing parks API that support a given sport and provide the city it correlates to
 
 ### Roadmap 
 
@@ -28,5 +27,8 @@
 **Future Features**
 - [ ] Allow a team captain to delete their team, which will automatically delete all the players from it as well
 - [ ] Allow teams to view potential opponents
-
+- [ ] Importing parks API that support a given sport and provide the city it correlates to
+- [ ] Add a request game option that allows the captain to choose an opponent team, park and time/date to play at
+- [ ] Add an in chat app instead of phone numbers
+- [ ] Add twilio api to send notification when a game is coming up or when their is a message in their inbox
 
