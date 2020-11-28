@@ -102,7 +102,7 @@ def show_player(user_id):
     
     return render_template('user_details.html', user_profile = user_profile, shared_teams=shared_teams, players=players)
 
-@app.route('/search')
+@app.route('/search_users')
 def search():
     """ see teammates that share your city and sport """
     #collect current user info
@@ -124,6 +124,16 @@ def display_teams():
     """ displays all teams"""
     teams = crud.get_teams()
     return render_template('teams.html', teams=teams)
+
+@app.route('/search_teams')
+def display_potential_teams():
+    """ Diaplay teams to a usre that matches their city and sport"""
+    flash(f"These are all the potential teams you could join based on your location and activity interest!")
+    profile = crud.get_player_by_id(session['current_user'])
+    #collect matching info
+    potential_teams = crud.get_team_by_sport_city(profile.sport, profile.city)
+
+    return render_template('findteams.html', potential_teams=potential_teams)
 
 @app.route('/createteam')
 def create_team():
