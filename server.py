@@ -20,63 +20,27 @@ def create_user():
     # user = create_player(user, pw, bio, sport, city)
     return render_template('createuser.html')
 
-@app.route('/search')
-def search():
-    """ see teammates that share your city and sport """
-    #collect current user info
-    flash(f"These are all the potential teammates based on your location and activity interest!")
-    profile = crud.get_player_by_id(session['current_user'])
-    #collect matching info
-    potentials = []
-    sport_potentials = crud.get_players_by_sport(profile.sport)
-    city_potentials = crud.get_players_by_city(profile.city)
-    users = crud.get_players()
-    #check all players for matches
-    for user in users:
-        if (user in city_potentials) and (user in sport_potentials):
-            potentials.append(user)
-    return render_template('findteammates.html', potentials=potentials)
-
-@app.route('/nav')
-def navigate():
-    """ Show Navigation page """
-    return render_template("nav.html")
-
-app.route('/button.json')
-def switch_button():
-    """ Determines what the button label should read depending on if the user is a player already or not """
-    user_id = session['current_user']
-    team_id = session['current_team']
-    user = crud.get_player_by_id(user_id)
-    team = crud.get_team_by_id(team_id)
-    phone = request.args.get('phone') #changed
-
-    if crud.is_new_player(user,team):
-        x = 'new player!'
+@app.route('/users', methods=["POST"])
+def register_user():
+    """create user and adds them to the database"""
+    #create city
+    city_id = request.form.get('cities')
+    c = crud.get_city_by_id(city_id) 
+    #create sport
+    sport_id = request.form.get('sports')
+    s = crud.get_sport_by_id(sport_id)
+    
+    #create player
+    username = request.form.get('username')
+    password = request.form.get('password')
+    bio = request.form.get('bio')
+    if crud.get_player_by_username(username):
+        flash(f'Sorry! That username is already in use!')
+        return redirect('/createuser')
     else:
-        x = 'already player!'
-    return jsonify(x, phone)
-
-@app.route('/add.json')
-def add_player():
-    user_id = session['current_user']
-    team_id = session['current_team']
-    phone = request.args.get('phone')
-    user = crud.get_player_by_id(user_id)
-    team = crud.get_team_by_id(team_id)
-    if crud.is_new_player(user,team):
-        x = 'new player!'
-        new_player = crud.create_team_player(phone, user, team) 
-        new_player = new_player.user.username
-    else:
-        x = 'already player!'
-        current_player = crud.get_player_by_user_team(user,team)
-        crud.remove_player(current_player)
-        new_player = user.username
-    # new_player = crud.create_team_player(phone, user, team) 
-    # new_player = new_player.user.username
-    return jsonify(new_player, user_id, x)
-
+        crud.create_player(username, password, bio, s, c)
+        flash(f'Player created! Please login')
+        return redirect('/')
 
 @app.route('/login')
 def login():
@@ -97,10 +61,74 @@ def login():
         flash(f'The password you inputed for {users_login.username} is incorrect. Try again!')
         return redirect('/')
 
+@app.route('/nav')
+def navigate():
+    """ Show Navigation page """
+    return render_template("nav.html")
+
+@app.route('/users')
+def display_user():
+    """ display all users that have been created """
+    users = crud.get_players()
+
+    return render_template('users.html', users=users)
+
+@app.route('/users/<user_id>')
+def show_player(user_id):
+    """Show details of a particular player """
+    #if user is player then get their user id and put their team ids in a set
+    user_profile = crud.get_player_by_id(user_id)
+    my_user = crud.get_player_by_id(session['current_user'])
+    if (crud.is_player(user_profile)) and (crud.is_player(my_user)):
+        users_teams = crud.get_players_teams(user_profile) #team objects in a set
+    #check if the current user is a player and get current users team ids in a set
+        my_users_teams = crud.get_players_teams(my_user)
+    #check for set overlap: if user and current user share a same team id then get users phone number
+        shared_teams = users_teams & my_users_teams
+    #else make phone number a str: 'Sorry but you're not teammates yet!
+    #pass the str into the rendered page
+    #get player obj from team
+        players =[]
+        for shared_team in shared_teams:
+            players.append(crud.get_player_by_user_team(user_profile, shared_team))
+    elif crud.is_captain(user_profile):
+        player_captain = crud.which_captain(user_profile)
+        players = [player_captain]
+        shared_teams = [player_captain.team]
+    else:
+        shared_teams = None
+        players = None
+
+    
+    return render_template('user_details.html', user_profile = user_profile, shared_teams=shared_teams, players=players)
+
+@app.route('/search')
+def search():
+    """ see teammates that share your city and sport """
+    #collect current user info
+    flash(f"These are all the potential teammates based on your location and activity interest!")
+    profile = crud.get_player_by_id(session['current_user'])
+    #collect matching info
+    potentials = []
+    sport_potentials = crud.get_players_by_sport(profile.sport)
+    city_potentials = crud.get_players_by_city(profile.city)
+    users = crud.get_players()
+    #check all players for matches
+    for user in users:
+        if (user in city_potentials) and (user in sport_potentials):
+            potentials.append(user)
+    return render_template('findteammates.html', potentials=potentials)
+
+@app.route('/teams')
+def display_teams():
+    """ displays all teams"""
+    teams = crud.get_teams()
+    return render_template('teams.html', teams=teams)
+
 @app.route('/createteam')
 def create_team():
     """ form to create new team is rendered """
-    #TODO: create a playing location? ie park? so people don't join teams that meet hella far
+    
     return render_template("createteam.html")
 
 @app.route('/teams', methods=["POST"])
@@ -136,11 +164,6 @@ def register_team():
         flash(f'Your team {my_team.team_name} has been created!')
         return redirect('/teams')
 
-@app.route('/teams')
-def display_teams():
-    """ displays all teams"""
-    teams = crud.get_teams()
-    return render_template('teams.html', teams=teams)
 
 @app.route('/teams/<team_id>')
 def show_team(team_id):
@@ -152,63 +175,27 @@ def show_team(team_id):
 
     return render_template('team_details.html', team=team, players=players)
 
-@app.route('/users/<user_id>')
-def show_player(user_id):
-    """Show details of a particular player """
-    #if user is player then get their user id and put their team ids in a set
-    user_profile = crud.get_player_by_id(user_id)
-    my_user = crud.get_player_by_id(session['current_user'])
-    if (crud.is_player(user_profile)) and (crud.is_player(my_user)):
-        users_teams = crud.get_players_teams(user_profile) #team objects in a set
-    #check if the current user is a player and get current users team ids in a set
-        my_users_teams = crud.get_players_teams(my_user)
-    #check for set overlap: if user and current user share a same team id then get users phone number
-        shared_teams = users_teams & my_users_teams
-    #else make phone number a str: 'Sorry but you're not teammates yet!
-    #pass the str into the rendered page
-    #get player obj from team
-        players =[]
-        for shared_team in shared_teams:
-            players.append(crud.get_player_by_user_team(user_profile, shared_team))
-    elif crud.is_captain(user_profile):
-        player_captain = crud.which_captain(user_profile)
-        players = [player_captain]
-        shared_teams = [player_captain.team]
+
+@app.route('/add.json')
+def add_player():
+    user_id = session['current_user']
+    team_id = session['current_team']
+    phone = request.args.get('phone')
+    user = crud.get_player_by_id(user_id)
+    team = crud.get_team_by_id(team_id)
+    if crud.is_new_player(user,team):
+        x = 'new player!'
+        new_player = crud.create_team_player(phone, user, team) 
+        new_player = new_player.user.username
     else:
-        shared_teams = None
-        players = None
+        x = 'already player!'
+        current_player = crud.get_player_by_user_team(user,team)
+        crud.remove_player(current_player)
+        new_player = user.username
+    # new_player = crud.create_team_player(phone, user, team) 
+    # new_player = new_player.user.username
+    return jsonify(new_player, user_id, x)
 
-    
-    return render_template('user_details.html', user_profile = user_profile, shared_teams=shared_teams, players=players)
-
-@app.route('/users', methods=["POST"])
-def register_user():
-    """create user and adds them to the database"""
-    #create city
-    city_id = request.form.get('cities')
-    c = crud.get_city_by_id(city_id) 
-    #create sport
-    sport_id = request.form.get('sports')
-    s = crud.get_sport_by_id(sport_id)
-    
-    #create player
-    username = request.form.get('username')
-    password = request.form.get('password')
-    bio = request.form.get('bio')
-    if crud.get_player_by_username(username):
-        flash(f'Sorry! That username is already in use!')
-        return redirect('/createuser')
-    else:
-        crud.create_player(username, password, bio, s, c)
-        flash(f'Player created! Please login')
-        return redirect('/')
-
-@app.route('/users')
-def display_user():
-    """ display all users that have been created """
-    users = crud.get_players()
-
-    return render_template('users.html', users=users)
 
 if __name__ == "__main__":
     connect_to_db(app)

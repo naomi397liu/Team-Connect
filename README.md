@@ -4,6 +4,8 @@
 
 - Ajax
 - SQL Alchemy
+- Jinja
+- Flask
 
 ### Data
 
