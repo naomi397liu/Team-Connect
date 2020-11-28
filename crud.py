@@ -100,6 +100,10 @@ def get_team_by_id(id):
     """gets the team that corresponds with the id taken in"""
     return Team.query.filter_by(team_id = id).first()
 
+def get_team_by_sport_city(sport, city):
+    """takes in an object sport and outputs a list of teams that correspond to that sport"""
+    return Team.query.filter_by(sport=sport, city=city).all()
+
 def get_team_by_teamname(name):
     """ takes in a team name and out puts the team object that corresponds with it"""
     return Team.query.filter_by(team_name = name).first()
