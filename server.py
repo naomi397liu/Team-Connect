@@ -34,11 +34,11 @@ def register_user():
     username = request.form.get('username')
     password = request.form.get('password')
     bio = request.form.get('bio')
-    if crud.get_player_by_username(username):
+    if crud.get_user_by_username(username):
         flash(f'Sorry! That username is already in use!')
         return redirect('/createuser')
     else:
-        crud.create_player(username, password, bio, s, c)
+        crud.create_user(username, password, bio, s, c)
         flash(f'Player created! Please login')
         return redirect('/')
 
@@ -48,7 +48,7 @@ def login():
     username = request.args.get('username')
     password = request.args.get('password')
 
-    users_login = crud.get_player_by_username(username)
+    users_login = crud.get_user_by_username(username)
     
     if users_login == None:
         flash(f'Looks like you have not made an account yet!')
@@ -77,8 +77,8 @@ def display_user():
 def show_player(user_id):
     """Show details of a particular player """
     #if user is player then get their user id and put their team ids in a set
-    user_profile = crud.get_player_by_id(user_id)
-    my_user = crud.get_player_by_id(session['current_user'])
+    user_profile = crud.get_user_by_id(user_id)
+    my_user = crud.get_user_by_id(session['current_user'])
     if (crud.is_player(user_profile)) and (crud.is_player(my_user)):
         users_teams = crud.get_players_teams(user_profile) #team objects in a set
     #check if the current user is a player and get current users team ids in a set
@@ -110,8 +110,8 @@ def search():
     profile = crud.get_player_by_id(session['current_user'])
     #collect matching info
     potentials = []
-    sport_potentials = crud.get_players_by_sport(profile.sport)
-    city_potentials = crud.get_players_by_city(profile.city)
+    sport_potentials = crud.get_users_by_sport(profile.sport)
+    city_potentials = crud.get_users_by_city(profile.city)
     users = crud.get_players()
     #check all players for matches
     for user in users:
@@ -129,7 +129,7 @@ def display_teams():
 def display_potential_teams():
     """ Diaplay teams to a usre that matches their city and sport"""
     flash(f"These are all the potential teams you could join based on your location and activity interest!")
-    profile = crud.get_player_by_id(session['current_user'])
+    profile = crud.get_user_by_id(session['current_user'])
     #collect matching info
     potential_teams = crud.get_team_by_sport_city(profile.sport, profile.city)
 
@@ -149,7 +149,7 @@ def register_team():
     city_id = request.form.get('cities')
     phone = request.form.get('phone')
     team_city = crud.get_city_by_id(city_id) #change to crud.get_city(city)
-    captain = crud.get_player_by_id(session['current_user'])
+    captain = crud.get_user_by_id(session['current_user'])
     #create the sport
     sport_id = request.form.get('sports')
     team_sport = crud.get_sport_by_id(sport_id) #get_sport_by_id
@@ -191,7 +191,7 @@ def add_player():
     user_id = session['current_user']
     team_id = session['current_team']
     phone = request.args.get('phone')
-    user = crud.get_player_by_id(user_id)
+    user = crud.get_user_by_id(user_id)
     team = crud.get_team_by_id(team_id)
     if crud.is_new_player(user,team):
         x = 'new player!'

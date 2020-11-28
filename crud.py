@@ -41,23 +41,23 @@ def get_sport_by_id(num):
     return Sport.query.filter_by(sport_id = num).first()
 
 #USER QUERIES
-def create_player(user, pw, bio, sport, city):
+def create_user(user, pw, bio, sport, city):
     """ creates a new player's profile """
     user = User(username=user, password=pw, bio=bio, sport=sport, city=city)
     db.session.add(user)
     db.session.commit()
     return user
 
-def get_players():
+def get_users():
     """return all users"""
 
     return User.query.all()
 
-def get_player_by_username(username):
+def get_user_by_username(username):
     """gets a player by unique username """
     return User.query.filter(username == User.username).first()
 
-def get_players_by_sport(sport_obj):
+def get_users_by_sport(sport_obj):
     """takes in a string: sport_name and outputs a list of players with that sports_name"""
      #TODO: user SQL filter_by to do this 
     teammates = []
@@ -68,7 +68,7 @@ def get_players_by_sport(sport_obj):
 
     return teammates
 
-def get_players_by_city(city_obj):
+def get_users_by_city(city_obj):
     """ takes in a city_name from db and outputs a list of players with that city_name"""
     #TODO: user SQL filter_by to do this 
     teammates = []
@@ -79,7 +79,7 @@ def get_players_by_city(city_obj):
     
     return teammates
 
-def get_player_by_id(num):
+def get_user_by_id(num):
     """takes in an ID and returns object users that corresponds with it"""
     return User.query.filter_by(user_id = num).first()
 
