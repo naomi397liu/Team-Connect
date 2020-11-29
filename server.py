@@ -69,7 +69,7 @@ def navigate():
 @app.route('/users')
 def display_user():
     """ display all users that have been created """
-    users = crud.get_players()
+    users = crud.get_users()
 
     return render_template('users.html', users=users)
 
@@ -107,12 +107,12 @@ def search():
     """ see teammates that share your city and sport """
     #collect current user info
     flash(f"These are all the potential teammates based on your location and activity interest!")
-    profile = crud.get_player_by_id(session['current_user'])
+    profile = crud.get_user_by_id(session['current_user'])
     #collect matching info
     potentials = []
     sport_potentials = crud.get_users_by_sport(profile.sport)
     city_potentials = crud.get_users_by_city(profile.city)
-    users = crud.get_players()
+    users = crud.get_users()
     #check all players for matches
     for user in users:
         if (user in city_potentials) and (user in sport_potentials):

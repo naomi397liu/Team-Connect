@@ -17,18 +17,18 @@
 
 ### Roadmap 
 
-- [ ] Allow users to create profiles in order to be linked up with others that share their location and sports interest(MVP)
-- [ ] Allow users to create teams. Right now a user can only create on team.
-- [ ] Allow users to join teams
-- [ ] Allow users to leave teams
-- [ ] Allow teammates to see each other's phone numbers to contact one another
-- [ ] Allow any user to view a team captain's phone number to arrange games again that team
-- [ ] Allow users to view potential teammates
-- [ ] Allow users to view potential teams
+- [x] Allow users to create profiles in order to be linked up with others that share their location and sports interest(MVP)
+- [x] Allow users to create teams
+- [x] Allow users to join teams
+- [x] Allow users to leave teams
+- [x] Allow teammates to see each other's phone numbers to contact one another
+- [x] Allow any user to view a team captain's phone number to arrange games against that team
+- [x] Allow users to view potential teammates
+- [x] Allow users to view potential teams they could join
 
 **Future Features**
 - [ ] Allow a team captain to delete their team, which will automatically delete all the players from it as well
-- [ ] Allow teams to view potential opponents
+- [ ] If a captain removes themselves from the team, the team will be deleted
 - [ ] Importing parks API that support a given sport and provide the city it correlates to
 - [ ] Add a request game option that allows the captain to choose an opponent team, park and time/date to play at
 - [ ] Add an in chat app instead of phone numbers
