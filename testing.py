@@ -1,40 +1,48 @@
-# import server
-# import unittest
+from server import app
+import unittest
+import os
+from model import db, connect_to_db
+import os
+from seed_database_test import load_test
+
+# Drop and re-create the test database.
+os.system("dropdb test")
+os.system("createdb test")
 
 
-# class DataBaseTesting(unittest.TestCase):
-#     """Examples of integration tests: testing Flask server."""
-#      def setUp(self):
-#         """Stuff to do before every test."""
 
-#         app.config["TESTING"] = True
-#         app.config["SECRET_KEY"] = "key"
-#         self.client = app.test_client()
+class DataBaseTesting(unittest.TestCase):
+    """Examples of integration tests: testing Flask server."""
+    def setUp(self):
+        """Stuff to do before every test."""
 
-#         # Connect to test database
-#         connect_to_db(app, db_uri="postgresql:///testdb")
-#         db.create_all()
-#         load_all()
+        app.config["TESTING"] = True
+        app.config["SECRET_KEY"] = "ABC"
+        self.client = app.test_client()
 
-#         # Put user1 into session.
-#         with self.client as c:
-#             with c.session_transaction() as sess:
-#                 sess["current_user"] = 1
-#                 sess["model_year"] = 2011
-#                 sess["make"] = "CHEVROLET"
-#                 sess["model"] = "Cruze"
+        # Connect to test database
+        connect_to_db(app, db_uri="postgresql:///test")
+        db.create_all()
+        load_test()
 
-#     def tearDown(self):
-#         """Do at end of every test."""
+        # Put user1 into session.
+        with self.client as c:
+            with c.session_transaction() as sess:
+                sess["current_user"] = 1
+                
+    # def test_login_route_correct(self):
+    #     """tests that the login route is working correctly with correct login information"""
+    #     result = self.client.get("/login",
+    #     data={"username":"test_user1", "password":"test_pass1"}, follow_redirects=True)
+    #     self.assertEqual(result.status_code, 200)
+    #     self.assertIn(b"Nice to see you back, test_user1!", result.data)
 
-#         db.session.close()
-#         db.drop_all()
+    def tearDown(self):
+        """Do at end of every test."""
 
-#     def test_existing_user_correct(self):
-#         client = server.app.test_client()
-#         result = client.get('/login', data=)
-#         self.assertIn(b'<h1>Color Form</h1>', result.data)
+        db.session.close()
+        db.drop_all()
 
 
-# if __name__ == '__main__':
-#     unittest.main()
+if __name__ == '__main__':
+    unittest.main()
