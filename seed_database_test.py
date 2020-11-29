@@ -12,20 +12,15 @@ import crud
 from model import db, connect_to_db
 import server
 
-os.system('dropdb test')
-os.system('createdb test')
+os.system('dropdb games')
+os.system('createdb games')
 
 connect_to_db(server.app)
 db.drop_all()
 db.create_all()
 
 def load_test():
-    os.system('dropdb test')
-    os.system('createdb test')
-
-    connect_to_db(server.app)   
-    db.drop_all()
-    db.create_all()
+    
     """ loads in all the test data"""
     sports = ['Soccer','Basketball','Volleyball']
     for sport in sports:
