@@ -9,11 +9,13 @@ app = Flask(__name__)
 app.secret_key = "ABC"
 app.jinja_env.undefined = StrictUndefined
 
+#ROUTES ORGANIZED IN ORDER OF MOST LIKELY NAVIGATION ROUTE OF A NEW USER
 @app.route('/')
 def show_login():
     """Show hello.html template."""
     return render_template('homepage.html')
 
+#USER RELATED PAGES
 @app.route('/createuser')
 def create_user():
     """Show greet.html template """
@@ -119,6 +121,7 @@ def search():
             potentials.append(user)
     return render_template('findteammates.html', potentials=potentials)
 
+#TEAM RELATED PAGES
 @app.route('/teams')
 def display_teams():
     """ displays all teams"""
@@ -174,7 +177,6 @@ def register_team():
         flash(f'Your team {my_team.team_name} has been created!')
         return redirect('/teams')
 
-
 @app.route('/teams/<team_id>')
 def show_team(team_id):
     """Show details of a particular team """
@@ -184,7 +186,6 @@ def show_team(team_id):
     session['current_team'] = team_id #stores the team id of the current team page user in on
 
     return render_template('team_details.html', team=team, players=players)
-
 
 @app.route('/add.json')
 def add_player():
