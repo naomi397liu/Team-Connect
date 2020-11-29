@@ -1,12 +1,7 @@
-""" functions to create tables and filter/query them """
-# TODO: change function names that pertain to user, to use 'user' in the name and change function names that pertain
-# to a player to use 'player' in the function names
+# functions to create tables and filter/query them 
 from model import db, User, Sport, Park, City, Team, Player, connect_to_db
-from datetime import datetime, time
-
 # creating data:
-#1
-# CITY QUERIES
+# CITY QUERIES - order of creation:1
 def create_city(city_name):
     """ creates a city needed to create a park for the sport to be played in; needed to create user to assess 
     what parks/other users they can play in/with"""
@@ -24,8 +19,7 @@ def get_city_by_id(num):
     """takes in an ID and returns the object city that corresponds to it"""
     return City.query.filter_by(city_id = num).first()
 
-# SPORT QUERIES
-
+# SPORT QUERIES - order of creation:2
 def create_sport(sport_name):
     """ creates a sport that is supported by a specific park; needs a park to have a sport otherwise where would you play
     needed to create player"""
@@ -40,7 +34,7 @@ def get_sport_by_id(num):
     """Takes in an ID and returns the object sport that corresponds to it"""
     return Sport.query.filter_by(sport_id = num).first()
 
-#USER QUERIES
+#USER QUERIES - order of creation: 3
 def create_user(user, pw, bio, sport, city):
     """ creates a new player's profile """
     user = User(username=user, password=pw, bio=bio, sport=sport, city=city)
@@ -83,7 +77,7 @@ def get_user_by_id(num):
     """takes in an ID and returns object users that corresponds with it"""
     return User.query.filter_by(user_id = num).first()
 
-#TEAM QUERIES
+#TEAM QUERIES - order of creation:4
 def create_team(name, description, user, sport, city):
     """ creates a team and takes in a team name, desciption, sport from table, city from table and park from table"""
     team = Team(team_name=name, description=description, captain=user, sport=sport, city=city)
@@ -108,7 +102,7 @@ def get_team_by_teamname(name):
     """ takes in a team name and out puts the team object that corresponds with it"""
     return Team.query.filter_by(team_name = name).first()
 
-#TEAM PLAYER QUERIES
+#TEAM PLAYER QUERIES - order of creation: 5
 def remove_player(player):
     """Takes in the object user and removes them as a player from a given team"""
     db.session.delete(player)
@@ -129,8 +123,6 @@ def create_team_player(phone, user, team):
 
     return player
 
-# def find_team_captain(user, team):
-#     """Takes in the object user and object team to find the object player who is the team captain"""
 def is_captain(user):
     """Find out if the user is a team captain."""
     if is_player(user):
@@ -180,14 +172,7 @@ def is_new_player(user, team):
         return False
     else:
         return True
-
-def create_park(park_name, city):
-    """ takes in a park name & city from city table it is in and adds it to the park table """
-    park = Park(park_name=park_name, city=city)
-    db.session.add(park)
-    db.session.commit()
-
-    return park
+        
 
 if __name__ == '__main__':
     from server import app
