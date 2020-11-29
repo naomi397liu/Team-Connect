@@ -30,13 +30,28 @@ class DataBaseTesting(unittest.TestCase):
         with self.client as c:
             with c.session_transaction() as sess:
                 sess["current_user"] = 1
-                
+    
+
     def test_login_route_correct(self):
         """tests that the login route is working correctly with correct login information"""
         result = self.client.post("/login",
         data={"username":"test_user1", "password":"test_pass1"}, follow_redirects=True)
         self.assertEqual(result.status_code, 200)
         self.assertIn(b"Nice to see you back, test_user1!", result.data)
+    
+    def test_login_route_incorrect(self):
+        """tests that the login route is working correctly with an incorrect password"""
+        result = self.client.post("/login",
+        data={"username":"test_user1", "password":"test_pass2"}, follow_redirects=True)
+        self.assertEqual(result.status_code, 200)
+        self.assertIn(b"The password you inputed for test_user1 is incorrect. Try again!", result.data)
+
+    def test_login_route_no_user(self):
+        """tests that the login route is working correctly with an incorrect username"""
+        result = self.client.post("/login",
+        data={"username":"test_user2", "password":"test_pass1"}, follow_redirects=True)
+        self.assertEqual(result.status_code, 200)
+        self.assertIn(b"Looks like you have not made an account yet!", result.data)
 
     def tearDown(self):
         """Do at end of every test."""

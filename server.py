@@ -44,11 +44,11 @@ def register_user():
         flash(f'Player created! Please login')
         return redirect('/')
 
-@app.route('/login')
+@app.route('/login', methods=["POST"])
 def login():
     """allow user to login """
-    username = request.args.get('username')
-    password = request.args.get('password')
+    username = request.form.get('username')
+    password = request.form.get('password')
 
     users_login = crud.get_user_by_username(username)
     
