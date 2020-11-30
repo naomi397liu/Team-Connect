@@ -3,7 +3,7 @@ import unittest
 import os
 from model import db, connect_to_db
 import os
-from seed_database_test import load_test
+from seed_databased import load_test
 
 # Drop and re-create the test database.
 os.system("dropdb games")
