@@ -11,7 +11,7 @@ os.system("createdb games")
 
 
 
-class DataBaseTesting(unittest.TestCase):
+class LoginRoute(unittest.TestCase):
     """Examples of integration tests: testing Flask server."""
     def setUp(self):
         """Stuff to do before every test."""
@@ -52,12 +52,14 @@ class DataBaseTesting(unittest.TestCase):
         data={"username":"test_user2", "password":"test_pass1"}, follow_redirects=True)
         self.assertEqual(result.status_code, 200)
         self.assertIn(b"Looks like you have not made an account yet!", result.data)
-
+    
+  
     def tearDown(self):
         """Do at end of every test."""
 
         db.session.close()
         db.drop_all()
+
 
 
 if __name__ == '__main__':

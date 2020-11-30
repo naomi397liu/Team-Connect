@@ -12,14 +12,14 @@ app.jinja_env.undefined = StrictUndefined
 #ROUTES ORGANIZED IN ORDER OF MOST LIKELY NAVIGATION ROUTE OF A NEW USER
 @app.route('/')
 def show_login():
-    """Show hello.html template."""
+    """Show homepage template."""
     return render_template('homepage.html')
 
 #USER RELATED PAGES
 @app.route('/createuser')
 def create_user():
     """Show greet.html template """
-    # user = create_player(user, pw, bio, sport, city)
+    
     return render_template('createuser.html')
 
 @app.route('/users', methods=["POST"])
@@ -101,7 +101,6 @@ def show_player(user_id):
         shared_teams = None
         players = None
 
-    
     return render_template('user_details.html', user_profile = user_profile, shared_teams=shared_teams, players=players)
 
 @app.route('/search_users')

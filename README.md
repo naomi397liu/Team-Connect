@@ -27,10 +27,13 @@
 - [x] Allow users to view potential teams they could join
 
 **Future Features**
+- [ ] Separate testdb
+- [ ] JS testing
 - [ ] Allow a team captain to delete their team, which will automatically delete all the players from it as well
 - [ ] If a captain removes themselves from the team, the team will be deleted
 - [ ] Importing parks API that support a given sport and provide the city it correlates to
 - [ ] Add a request game option that allows the captain to choose an opponent team, park and time/date to play at
 - [ ] Add an in chat app instead of phone numbers
 - [ ] Add twilio api to send notification when a game is coming up or when their is a message in their inbox
+
 
