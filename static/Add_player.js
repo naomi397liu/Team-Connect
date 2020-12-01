@@ -12,12 +12,12 @@ function alertFunction(evt){
         if( data[2] === 'new player!'){
             
             $('#player-list').append(res);
-            alert(`Welcome to the team, ${data[0]}!`);
+            flash(`Welcome to the team, ${data[0]}!`);
             console.log('playerList for new player', playerList);
             
 
         }else if (data[2] === 'already player!'){
-            alert(`${data[2]} Removed: ${data[0]}`);
+            flash(`${data[2]} Removed: ${data[0]}`);
     
             location.reload(); 
             
