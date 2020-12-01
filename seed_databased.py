@@ -66,7 +66,7 @@ def load_test():
 
     #unsed variables for testing in the console
 
-    team1 = crud.create_team('Killers', 'Play to win',crud.get_user_by_id(3), crud.get_sport_by_id(1), crud.get_city_by_id(1))
+    team1 = crud.create_team('Killers', 'Play to win',crud.get_user_by_id(1), crud.get_sport_by_id(1), crud.get_city_by_id(1))
     # player1 = crud.create_team_player(a, crud.get_user_by_id(1), crud.get_team_by_id(1))
     player2 = crud.create_team_player(b, crud.get_user_by_id(3), crud.get_team_by_id(1))
     # player3 = crud.create_team_player(c, crud.get_user_by_id(2), crud.get_team_by_id(1))

@@ -31,7 +31,7 @@ class LoginRoute(unittest.TestCase):
             with c.session_transaction() as sess:
                 sess["current_user"] = 1
     
-
+    #login
     def test_login_route_correct(self):
         """tests that the login route is working correctly with correct login information"""
         result = self.client.post("/login",
@@ -53,13 +53,19 @@ class LoginRoute(unittest.TestCase):
         self.assertEqual(result.status_code, 200)
         self.assertIn(b"Looks like you have not made an account yet!", result.data)
     
-    #all tests have to begin with test....!!
-    def test_button_add_player(self):
-        """tests that the login route is working correctly with an incorrect username"""
-        result = self.client.post("/login", data=None, follow_redirects=True)
+    #create_user
+    def test_register_user_incorrect(self):
+        """tests that the createuser route is working correctly with an already in use username"""
+        result = self.client.post("/users", data={"username":"test_user1"}, follow_redirects=True)
         self.assertEqual(result.status_code, 200)
-        # self.assertIn(b'<form action="/users" method="POST"', result.data)
-    
+        self.assertIn(b"Sorry! That username is already in use!", result.data)
+
+    def test_register_user_correct(self):
+        """tests that the createuser route is working correctly with a new username"""
+        result = self.client.post("/users", data={"username":"test_user2"}, follow_redirects=True)
+        self.assertEqual(result.status_code, 200)
+        self.assertIn(b"Player created! Please login", result.data)
+
     def tearDown(self):
         """Do at end of every test."""
 
