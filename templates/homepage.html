@@ -1,11 +1,20 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
+  <title>Login</title>
 
-{% block title %}Login{% endblock %}
+  <h1>Login</h1>
 
-  <h4>{% block head %}Welcome to Login page!{% endblock %}</h4>
+</head>
+  <h4>Welcome to Login page!</h4>
 
-  {% block body %}
-      
+  <body>
+
+    {% for msg in get_flashed_messages() %}
+    <p class="flash-msg">
+      {{ msg }}
+    </p>
+    {% endfor %}
+
     <form method="POST" action="/login">
       username:
       <input type="text" name="username"><br>
@@ -19,4 +28,5 @@
       <input type="submit" value="Create new user">
     </form>
 
-  {% endblock %}
+  </body>
+</html>
