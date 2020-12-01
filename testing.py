@@ -53,7 +53,13 @@ class LoginRoute(unittest.TestCase):
         self.assertEqual(result.status_code, 200)
         self.assertIn(b"Looks like you have not made an account yet!", result.data)
     
-  
+    #all tests have to begin with test....!!
+    def test_button_add_player(self):
+        """tests that the login route is working correctly with an incorrect username"""
+        result = self.client.post("/login", data=None, follow_redirects=True)
+        self.assertEqual(result.status_code, 200)
+        # self.assertIn(b'<form action="/users" method="POST"', result.data)
+    
     def tearDown(self):
         """Do at end of every test."""
 

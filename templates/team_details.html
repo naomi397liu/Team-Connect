@@ -1,16 +1,13 @@
-<!doctype html>
-<html>
-  <head>
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <title>
-      Team: {{team.team_name}}
-    </title>
-    <h1>Team: {{team.team_name}}</h1>
-    <script src="/static/Add_player.js"></script>
-  </head>
 
-    <body>
-          <h2>{{team.team_name}}:</h2><br>
+    {% extends 'base.html' %}
+    {% block title %}Team{% endblock %}
+    {% block head %}Team{% endblock %}
+
+    <script src="/static/Add_player.js"></script>
+
+  {% block body %}
+      
+          <h2>{{team.team_name}}</h2><br>
           Captain: {{team.captain.username}} <br>
           Sport: {{team.sport.sport_name}}<br>
           City: {{team.city.city_name}}<br>
@@ -42,5 +39,4 @@
         
   
    
-    </body>
-</html>
+   {% endblock %}

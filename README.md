@@ -26,7 +26,7 @@
 - [x] Allow users to view potential teammates
 - [x] Allow users to view potential teams they could join
 
-**Future Features**
+**Version 2.0: Future Features**
 - [ ] Separate testdb
 - [ ] JS testing
 - [ ] Allow a team captain to delete their team, which will automatically delete all the players from it as well
