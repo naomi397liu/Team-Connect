@@ -4,10 +4,13 @@ from flask import Flask, request, render_template, flash, redirect, session, jso
 import crud
 from jinja2 import StrictUndefined
 from model import connect_to_db
+# from seed_databased import load_test
 
 app = Flask(__name__)
 app.secret_key = "ABC"
 app.jinja_env.undefined = StrictUndefined
+
+# load_test()
 
 #ROUTES ORGANIZED IN ORDER OF MOST LIKELY NAVIGATION ROUTE OF A NEW USER
 @app.route('/')
@@ -145,27 +148,24 @@ def create_team():
 
 @app.route('/teams', methods=["POST"])
 def register_team():
-    #TODO: add park portion thru ajax, such when a city is selected, only parks in that city show
+    
     team_name = request.form.get('team_name')
     description = request.form.get('description')
     city_id = request.form.get('cities')
     phone = request.form.get('phone')
-    team_city = crud.get_city_by_id(city_id) #change to crud.get_city(city)
+    team_city = crud.get_city_by_id(city_id)
     captain = crud.get_user_by_id(session['current_user'])
     #create the sport
     sport_id = request.form.get('sports')
-    team_sport = crud.get_sport_by_id(sport_id) #get_sport_by_id
-    #create park
-    # park = request.form.get('park')
-    # teams_park = crud.create_park(park, team_city)
-    # TODO: my_session = session['my_teams'][crud.get_team_by_id(team_id).team_id] assuming one user could 
-    # have already created a team
-    if crud.is_captain(captain):
+    team_sport = crud.get_sport_by_id(sport_id)
+    is_captain = crud.is_captain(captain)
+    already_team = crud.get_team_by_teamname(team_name)
+    if is_captain:
         team = crud.which_captain(captain).team
         players = crud.get_teams_players(team)
-        flash(f'Sorry, but you already have a team that you are a captain of!')
+        flash(f'Sorry, but you already have a team that you are a captain of!') #flashes in team_details
         return render_template('team_details.html', team=team, players=players)
-    elif crud.get_team_by_teamname(team_name):
+    elif already_team:
         flash(f'Sorry! That team name is already in use!')
         return redirect('/createteam')
     else:
@@ -202,8 +202,7 @@ def add_player():
         current_player = crud.get_player_by_user_team(user,team)
         crud.remove_player(current_player)
         new_player = user.username
-    # new_player = crud.create_team_player(phone, user, team) 
-    # new_player = new_player.user.username
+
     return jsonify(new_player, user_id, x)
 
 

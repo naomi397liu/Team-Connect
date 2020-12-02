@@ -1,10 +1,9 @@
 
-    {% extends 'base.html' %}
-    {% block title %}Team{% endblock %}
-    {% block head %}Team{% endblock %}
-
-    <script src="/static/Add_player.js"></script>
-
+{% extends 'base.html' %}
+   
+{% block title %}Team{% endblock %}
+{% block head %}Team{% endblock %}
+  
   {% block body %}
       
           <h2>{{team.team_name}}</h2><br>
@@ -14,21 +13,20 @@
           Team's Description: {{team.description}}<br><br>
        
           <h3>Players</h3>
-          <form action='/add.json'>
+          <form id="add">
+
             <label for="phone">What is the best phone number for your teammates to reach you at?</label>
-            <input type="text" name="phone" required>
-            <button id="add-player" onclick="alertFunction()" value=button_label>Join/Leave</button>
-        </form> 
-       
-        
-         
+            <input type="text" name="phone" id="phone" required>
+            <button type="submit" id="add-player" value=button_label>Join/Leave</button>
+
+        </form>
         
 
           <ul id="player-list">
             <div id="new-player"></div>
             
           {% for player in players %}
-            <li> 
+            <li id={{player.user.user_id}}> 
                 <a href="/users/{{ player.user.user_id }}">
                 {{player.user.username}}</a>
                    
@@ -37,6 +35,6 @@
           
         </ul>
         
-  
-   
+        <script src="/static/Add_player.js"></script>
    {% endblock %}
+  

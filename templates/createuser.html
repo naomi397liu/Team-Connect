@@ -1,9 +1,21 @@
-{% extends 'base.html' %}
-{% block title %}Create Account{% endblock %}
+<!DOCTYPE html>
+<html>
+  <title>Create User</title>
 
-{% block head %}Create Account{% endblock %}
+  <h1>Create User</h1>
 
-  {% block body %}
+</head>
+  <h4>Tell us about yourself!</h4>
+
+  <body>
+
+    {% for msg in get_flashed_messages() %}
+    <p class="flash-msg">
+      {{ msg }}
+    </p>
+    {% endfor %}
+
+  <body>
     <form action="/users" method="POST">
       username:
       <input type="text" name="username"><br>
@@ -30,4 +42,4 @@
       <input type="submit" value="Create Account and Login"><br>
     </form>
 
-  {% endblock %}
+  </body>

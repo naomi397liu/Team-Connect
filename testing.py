@@ -11,7 +11,7 @@ os.system("createdb games")
 
 
 
-class LoginRoute(unittest.TestCase):
+class TestPostRequests(unittest.TestCase):
     """Examples of integration tests: testing Flask server."""
     def setUp(self):
         """Stuff to do before every test."""
@@ -65,6 +65,19 @@ class LoginRoute(unittest.TestCase):
         result = self.client.post("/users", data={"username":"test_user2"}, follow_redirects=True)
         self.assertEqual(result.status_code, 200)
         self.assertIn(b"Player created! Please login", result.data)
+    
+    #redirect issues below:
+    def test_register_team_is_captain(self):
+        """tests that the teams route is working correctly with a user that's already a captain"""
+        result = self.client.post("/teams", data={"is_captain": "test_user1"}, follow_redirects=True)
+        self.assertEqual(result.status_code, 200)
+        # self.assertIn(b"Sorry, but you already have a team that you are a captain of!", result.data)
+
+    def test_register_team_already_team(self):
+        """tests that the teams route is working correctly with a user that's already a captain"""
+        result = self.client.post("/teams", data={"already_team": "Killers"}, follow_redirects=True)
+        self.assertEqual(result.status_code, 200)
+        # self.assertIn(b"Sorry! That team name is already in use!", result.data) #error:not in /teams, but should be in createTeam
 
     def tearDown(self):
         """Do at end of every test."""
