@@ -1,0 +1,13 @@
+/* TODO: Figure out how to style nav bar */
+
+.navbar-nav{
+    background-color:#fa8ae7;
+
+}
+.logo{
+    height:100px;
+    width:150px;
+}
+body{
+    background-color: #fae58a;
+}
