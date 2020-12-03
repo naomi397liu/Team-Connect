@@ -1,43 +1,20 @@
-
+/* TODO: create Columns on either side with blurred sports images */
 #logo{
     display: inline-block;
-    width:200px;
-    height: 150px;
+    width:150px;
+    height: 90px;
     text-align: center;
 }
-
-h4 {
-    margin-top: 2em;
-    text-align: center;
-}
-#home{
+body {
     color:black;
     background-color: #fae58a;
     text-align: center;
 }
-#login{
-    padding: 2em;
-    /* margin-top: 2em; */
-    border: 2px solid white;
-    display: inline-block;
-    margin-right: 12em;
-    text-align: center;
+
+input[type="submit"] {
+    box-shadow: 1px 2px; 
 }
 
-#or {
-    display: inline-block;
-    font-weight: bold;
-
-    /* margin-bottom: 5em; */
+.flash-msg{
+    color: red;
 }
-#new-user {
-    margin-left: 13em;
-    padding-left: 4.6em;
-    padding-right: 4.6em;
-    padding-top:5.1em;
-    padding-bottom:2.5em;
-    border: 2px solid white;
-    display: inline-block;
-}
-
-/* black: #000000 ink: #062F4F posy: #813772 embers: #B82601 */

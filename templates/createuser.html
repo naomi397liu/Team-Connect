@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <title>Create User</title>
+  <head>
+    <title>Create User</title>
+    <link rel="stylesheet" href="/static/create_user.css">
+    <h1>Create User</h1>  
 
-  <h1>Create User</h1>
-
-</head>
+  </head>
   <h4>Tell us about yourself!</h4>
 
   <body>
@@ -17,11 +18,9 @@
 
   <body>
     <form action="/users" method="POST">
-      username:
-      <input type="text" name="username"><br>
-      password:
-      <input type="text" name="password"><br><br>
-      sport: <br>
+      <input type="text" name="username" placeholder="Username"><br>
+      <input type="text" name="password" placeholder="Password"><br><br>
+      Sport: <br>
       <select name="sports" id="sports">
         <option value="1">Soccer</option>
         <option value="2">Basketball</option>
@@ -29,17 +28,26 @@
       </select>
       
         <br>
-      city: <br>
+      City: <br>
       <select name="cities" id="cities">
           <option value="1">San Francisco</option>
           <option value="2">Sacramento</option>
           <option value="3">Los Angeles</option>
       </select>
       <br><br>
-      bio: <br>
-      <input type="text" name="bio"><br>
-      <br>
+      
+      Bio: <br>
+      <div class="textarea-wrapper">
+        <textarea type="text" id="bio" 
+        placeholder="What kind of player are you?" maxlength="50"></textarea><br>
+        <span class="chars" id="charlength">50</span> characters remaining
+      </div>
+      <br><br>
       <input type="submit" value="Create Account and Login"><br>
     </form>
 
   </body>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+  <script src="/static/bioBox.js"></script>
+</html>

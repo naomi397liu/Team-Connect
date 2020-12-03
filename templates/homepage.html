@@ -5,10 +5,10 @@
 
 <link rel="stylesheet" href="/static/homepage.css">
 
-  <p><h1>Team Connect</h1> <img id="logo" src="/static/logo.png"></p>
+  <p><h1>Welcome to Team Connect!</h1> <img id="logo" src="/static/logo.png"></p>
 </head>
 
-  <h2>Welcome to Login page!</h2>
+  <h2>Sign In</h2>
 
   <body>
 
@@ -20,28 +20,14 @@
     <div id="login">
       <form method="POST" action="/login">
         <h4>Already have an account?</h4>
-        username:
-        <input type="text" name="username"><br>
-        password:
-        <input type="password" name="password"><br><br>
+        <input type="text" name="username" placeholder="Username"><br>
+        <input type="password" name="password" placeholder="Password"><br><br>
         <input type="submit" value="Login"><br>
       </form>
-    </div>
-      <p id="or">OR</p>
-    <div id="new-user">
       <form action="/createuser" >
         <h4 id="new-user-text">Are you a new user?</h4>
         <input type="submit" value="Create account">
       </form>
     </div>
-    <!-- <p>Tired of boring gym workouts or going on run by yourself? Taking care of yourself shouldn't feel like a chore! Maybe you just miss kicking a ball around with the boys? 
-      Where did the time go? Team Connect is here to get you connected to others who also want to play sports. 
-    </p> -->
-    <!-- <ul>
-      Find Teammates<br>
-      Create a Team<br>
-      Join a Team<br>
-      Play Ball!
-    </ul> -->
   </body>
 </html>
