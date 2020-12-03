@@ -5,13 +5,31 @@
     width:150px;
     height: 90px;
     text-align: center;
+    margin-top: 3%;
+}
+h1{
+    color:#fae58a;
+}
+#login{
+    /* background-image: radial-gradient(rgb(255, 145, 0),  #fae58a, rgb(0, 77, 128)) */
+    background-color: #fae58a;
+
+}
+div{
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-top: 5%;
+    padding-top: 1%;
+    padding-bottom: 2%;
 }
 body {
     color:black;
-    background-color: #fae58a;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: medium;
+    background-image: url("runner.jpg");
+    background-size: 20%;
+
 }
 
 input[type="submit"] {
