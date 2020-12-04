@@ -1,7 +1,7 @@
 /* TODO: Add blurred column pictures */
 html{
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica;
    
 }
 h1{
@@ -9,9 +9,9 @@ h1{
 }
 body{
     font-size: medium;
-    background-image: url("sportsBalls.jpg");
+    background-image: url("/static/imgs/sportsBalls.jpg");
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica;
 }
 div{
     background-color: white;
@@ -30,7 +30,7 @@ select{
     width: 195px;
     height: 100px;
     font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica;
     margin-left: 25%;
     margin-right: 10%;
     text-align: center;
@@ -38,10 +38,12 @@ select{
 textarea{
     width: 195px;
     height: 100px;
+    font-size: 16px;
+    font-family: Helvetica;
 }
 form{
     font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica;
     text-align: center;
 }
 
@@ -49,7 +51,7 @@ input[type="submit"] {
     box-shadow: 1px 2px;
 }
 input{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica;
     font-size: 16px;
     
 }

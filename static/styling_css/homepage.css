@@ -28,7 +28,7 @@ body {
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: medium;
-    background-image: url("sportsBalls.jpg");
+    background-image: url("/static/imgs/sportsBalls.jpg");
     background-size: cover;
 
 }
