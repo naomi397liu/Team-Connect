@@ -17,7 +17,8 @@
 
             <label for="phone">What is the best phone number for your teammates to reach you at?</label>
             <input type="text" name="phone" id="phone" required>
-            <button type="submit" id="add-player" value=button_label>Join/Leave</button>
+            <button type="submit" id="add-player" value=button_label>
+              <i class="fas fa-user-plus"></i> / <i class="fas fa-user-slash"></i></button>
 
         </form>
         
@@ -27,6 +28,7 @@
             
           {% for player in players %}
             <li id={{player.user.user_id}}> 
+              <i class="far fa-address-card"></i>
                 <a href="/users/{{ player.user.user_id }}">
                 {{player.user.username}}</a>
                    
@@ -35,6 +37,6 @@
           
         </ul>
         
-        <script src="/static/Add_player.js"></script>
+        <script src="/static/js_files/Add_player.js"></script>
    {% endblock %}
   

@@ -8,7 +8,8 @@ const alertFunction = (evt) => {
 
     $.get(`/add.json?phone=${phone}`, (data) => { 
         const btn = $('#add-player');
-        const res = $(`<li id=${data[1]}><a href="/users/${data[1]}">${data[0]}</a></li>`); // "lucia" -> users/18
+        const res = $(`<li id=${data[1]}><i class="fas fa-user-plus"></i>
+        <a href="/users/${data[1]}">${data[0]}</a></li>`); 
         let playerList = $('#player-list')
         
         if( data[2] === 'new player!'){

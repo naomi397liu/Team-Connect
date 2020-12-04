@@ -14,8 +14,8 @@
         {% if shared_teams %}
             {% for player in players %}
             <div>
-                <ul>Team: {{player.team.team_name}} 
-                    <ul>{{player.phone}} </ul>
+                <ul><i class="fas fa-volleyball-ball"></i>Team: {{player.team.team_name}} 
+                    <ul><i class="fas fa-comment"></i> {{player.phone}} </ul>
                 </ul>
             </div>
             {% endfor %}

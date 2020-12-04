@@ -1,9 +1,9 @@
 html{
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:Helvetica
    
 }
-h1{
+/* h1{
     color:white;
 }
 body{
@@ -63,4 +63,4 @@ input{
     height: 90px;
     text-align: center;
     margin-bottom: 1%;
-}
+} */
