@@ -1,14 +1,10 @@
-/* TODO: Figure out how to style nav bar */
-
-.navbar-nav{
-    background-color:#fa8ae7;
-
+html {
+    text-align: center;
 }
-.logo{
+.logo {
     height:100px;
     width:150px;
 }
-body{
+body {
     background-color: #fae58a;
 }
-.navbar-dark{}

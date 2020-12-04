@@ -1,8 +1,36 @@
 {% extends 'base.html' %}
 {% block title %} All Users {% endblock %}
-{% block head %} All Users {% endblock %}
+{% block head %} All Users 
+<style>
+  h1{
+    color: white;
+  }
+  body{
+      font-size: medium;
+      background-image: url("/static/imgs/sportsBalls.jpg");
+      text-align: center;
+      font-family: Helvetica;
+  }
+  ul {
+    background-color: white;
+    margin-left: 43%;
+    margin-right: 42%;
+    column-count: 4;
+    column-gap: 30%;
+  }
+  ul li {
+  background: rgb(236, 236, 236);
+  margin-top: 5%;
+  margin-bottom: 3%;
+  text-align: left;
+  position: relative;
+  }
+
+</style>
+{% endblock %}
 
   {% block body %}
+  <div id="list"></div>
     <ul>
       {% for user in users %}
         <li>
@@ -13,6 +41,6 @@
         </li>
       {% endfor %}
     </ul>
-  
+  </div>
   {% endblock %}
  

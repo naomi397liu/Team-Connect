@@ -1,37 +1,91 @@
 {% extends 'base.html' %}
 {% block title %}Create Team{% endblock %}
-<link rel="stylesheet" href="/static/styling_css/create_user.css">
-{% block head %}Create Team{% endblock %}
+<link rel="stylesheet" href="/static/styling_css/create_team.css">
+{% block head %}Create Team
+<style>
+  h1{
+      margin-top: 1%;
+      color:white;
+  }
+  body{
+      font-size: medium;
+      background-image: url("/static/imgs/sportsBalls.jpg");
+      text-align: center;
+      font-family: Helvetica;
+  }
+  form {
+      background-color: white;
+      margin-left: 35%;
+      margin-right: 35%;
+      margin-top: 1%;
+      padding-top: 1%;
+      padding-bottom: 2%;
+      margin-bottom: 10%;
+      font-size: 16px;
+  }
+  input[type="submit"] {
+      box-shadow: 1px 2px;
+  }
+  input{
+      font-family: Helvetica;
+      font-size: 16px; 
+  }
+  p {
+    color: rgb(255, 165, 21);
+  }
+  .flash-msg{
+      color: red;
+  }
+  #dropdown{
+    text-align: left;
+    margin-left: 20%;
+  }
+  #sports{
+    width: 160px;
+    height: 24px;
+    margin-top: 2%;
+  }
+  #cities{
+    width: 170px;
+    height: 24px;
+    margin-top: 2%;
+  }
+  select{
+    margin-bottom: 5%;
+  }
+</style>
+{% endblock %}
 
   {% block body %}
+  <div>
     <form action="/teams" method="POST">
-      
-      Team name: <input type="text" name="team_name"><br><br>
-      
-      Phone: <input type="text" name="phone" required><br>
-      <p>As the creator of this team, you are also the team captain and other teams may contact you to request a game against yours! 
+      <p>Other teams will contact you to request a game, Captain! 
       </p>
-
-      Sport: <br>
-      <select name="sports" id="sports">
-        <option value=1>Soccer</option>
-        <option value=2>Basketball</option>
-        <option value=3>Volleyball</option>
-      </select>
-        <br><br>
-
-      City: <br>
-      <select name="cities" id="cities">
-          <option value="1">San Francisco</option>
-          <option value="2">Sacramento</option>
-          <option value="3">Los Angeles</option>
-      </select>
+      <input type="text" name="team_name" placeholder="Team Name"><br><br>
       
-      <br><br>
-      Description & Details:
-      <input type="text" name="description"><br>
+      <input type="text" name="phone" placeholder="Phone Number" required><br><br>
+      
+      <div id="dropdown">
+        <label> Sport:</label>
+        <select name="sports" id="sports">
+          <option value=1>Soccer</option>
+          <option value=2>Basketball</option>
+          <option value=3>Volleyball</option>
+        </select>
+          <br>
+
+        <label> City: </label>
+        <select name="cities" id="cities">
+            <option value="1">San Francisco</option>
+            <option value="2">Sacramento</option>
+            <option value="3">Los Angeles</option>
+        </select>
+      </div>
+
+      <br>
+      <input type="text" name="description" placeholder="Description & Details"><br>
       <br>
       <input type="submit" value="Create Team"><br>
     </form>
-
+  </div>
   {% endblock %}

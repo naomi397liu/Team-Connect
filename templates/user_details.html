@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}User: {{user_profile.username}}{% endblock %}
 
-{% block head %}User: {{user_profile.username}}{% endblock %}
+{% block head %}<i class="fas fa-portrait"></i>User:{% endblock %}
 
   {% block body %}
-          <h2>{{user_profile.username}}:</h2><br>
-         <h4>My Sport: <br>
+          <h2>{{user_profile.username}}</h2><br>
+         <h4><i class="fas fa-futbol"></i> My Sport: <br>
             {{user_profile.sport.sport_name}}</h4>
-          <h4> My city:  <br>
+          <h4><i class="fas fa-map-marker-alt"></i> My city:  <br>
             {{user_profile.city.city_name}}</h4> 
-            <h4>About me: <br>
+            <h4><i class="fas fa-user-circle"></i> About me: <br>
             {{user_profile.bio}} </h4>
         {% if shared_teams %}
             {% for player in players %}
