@@ -6,20 +6,24 @@
   h1{
       margin-top: 1%;
       color:white;
+      text-align: center;
   }
   body{
-      font-size: medium;
-      background-image: url("/static/imgs/sportsBalls.jpg");
-      text-align: center;
-      font-family: Helvetica;
+    font-size: medium;
+    background-image: url("/static/imgs/sportsBalls.jpg");
+    text-align: left;
+    font-family: Helvetica;
+    backdrop-filter: blur(5px);
   }
   form {
       background-color: white;
+      background: rgba(255,255,255,0.9);
       margin-left: 35%;
       margin-right: 35%;
       margin-top: 1%;
       padding-top: 1%;
       padding-bottom: 2%;
+      padding-left: 5%;
       margin-bottom: 10%;
       font-size: 16px;
   }
@@ -36,10 +40,6 @@
   .flash-msg{
       color: red;
   }
-  #dropdown{
-    text-align: left;
-    margin-left: 20%;
-  }
   #sports{
     width: 160px;
     height: 24px;
@@ -53,6 +53,7 @@
   select{
     margin-bottom: 5%;
   }
+  
 </style>
 {% endblock %}
 
@@ -61,12 +62,14 @@
     <form action="/teams" method="POST">
       <p>Other teams will contact you to request a game, Captain! 
       </p>
+      <span>Enter Team Name</span><br>
       <input type="text" name="team_name" placeholder="Team Name"><br><br>
       
+      <span>Enter Phone Number</span><br>
       <input type="text" name="phone" placeholder="Phone Number" required><br><br>
       
       <div id="dropdown">
-        <label> Sport:</label>
+        <span>Sport</span><br>
         <select name="sports" id="sports">
           <option value=1>Soccer</option>
           <option value=2>Basketball</option>
@@ -74,7 +77,7 @@
         </select>
           <br>
 
-        <label> City: </label>
+        <span>City</span><br>
         <select name="cities" id="cities">
             <option value="1">San Francisco</option>
             <option value="2">Sacramento</option>
@@ -83,6 +86,7 @@
       </div>
 
       <br>
+      <span>Description & Details</span><br>
       <input type="text" name="description" placeholder="Description & Details"><br>
       <br>
       <input type="submit" value="Create Team"><br>

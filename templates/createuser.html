@@ -14,20 +14,22 @@
       {{ msg }}
     </p>
     {% endfor %}
-      <div>
+      <div class="form">
         <h2>Tell us about yourself!</h2>
         <form action="/users" method="POST">
-          <input type="text" name="username" placeholder="Username"><br>
+          <label>Enter Username</label><br>
+          <input type="text" name="username" placeholder="Username"><br><br>
+          <label>Enter Passsword</label><br>
           <input type="text" name="password" placeholder="Password"><br><br>
-          Sport: <br>
+          Select Sport <br>
           <select name="sports" id="sports">
             <option value="1">Soccer</option>
             <option value="2">Basketball</option>
             <option value="3">Volleyball</option>
           </select>
-          
             <br>
-          City: <br>
+            <br>
+          Select City <br>
           <select name="cities" id="cities">
               <option value="1">San Francisco</option>
               <option value="2">Sacramento</option>
@@ -35,14 +37,13 @@
           </select>
           <br><br>
           
-         
-          <div id="textarea-wrapper">
-            <label>Bio:</label>
+          <label>Enter Bio</label>
+          <div class="textarea-wrapper">
             <textarea type="text" name="bio" 
             placeholder="What kind of player are you?" maxlength="50"></textarea><br>
+          </div>
             <label>characters remaining:</label>
               <span class="chars" id="charlength">50</span> 
-          </div>
           <br><br>
           <input type="submit" value="Create Account and Login"><br>
         </form>

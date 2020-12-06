@@ -17,17 +17,27 @@
     .user{
         background-color:white;
         background: rgba(255,255,255,0.9);
-        margin-left: 35%;
-        margin-right: 35%;
+        margin-left: 33%;
+        margin-right: 33%;
         margin-top: 3%; 
         padding-top: 1%;
         padding-bottom: 1%;
         padding-left:5%;
+        padding-right:2%;
         text-align: left;
         font-size: medium;
     }
     ul{
         text-align: left;
+    }
+    .flash-msg{
+        margin-top:2%;
+        color: red;
+    }
+    #about{
+        border-style: groove;
+        padding-right:3%;
+        padding-bottom:3%;
     }
     
 </style>
@@ -35,17 +45,20 @@
 
   {% block body %}
     <div class="user">
-        <label><h5><i class="far fa-address-card"></i> Username:</h5></label>
-        {{user_profile.username}}<br><br>
-         <label><h5><i class="fas fa-futbol"></i> Sport:</h5></label>
-            {{user_profile.sport.sport_name}}<br><br>
-        <label><h5><i class="fas fa-map-marker-alt"></i> City: </h5></label>
-            {{user_profile.city.city_name}}<br><br>
-        <label><h5><i class="fas fa-user-circle"></i> About me: </h5></label>
-            {{user_profile.bio}}<br><br>
+        <!-- <label><h5><i class="far fa-address-card"></i> Username:</h5></label> -->
+        <h3>{{user_profile.username}}</h3><br>
+         <label><i class="fas fa-futbol"></i> Sport:</label>
+            {{user_profile.sport.sport_name}}<br>
+        <label><i class="fas fa-map-marker-alt"></i> City: </label>
+            {{user_profile.city.city_name}}<br>
+        <label><i class="fas fa-user-circle"></i> About me: </label>
+        <div id="about">
+            {{user_profile.bio}}
+        </div>
+        <br><br>
         
         <div>
-            <label><h5>My Teams:</h5></label>
+            <label><h3>My Teams:</h3></label>
             {% if shared_teams %}
                 {% for player in players %}
                     <ul><i class="fas fa-volleyball-ball"></i>{{player.team.team_name}} 
