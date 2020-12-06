@@ -66,10 +66,6 @@ def login():
         flash(f'The password you inputed for {users_login.username} is incorrect. Try again!')
         return redirect('/')
 
-@app.route('/nav')
-def navigate():
-    """ Show Navigation page """
-    return render_template("nav.html")
 
 @app.route('/users')
 def display_user():
