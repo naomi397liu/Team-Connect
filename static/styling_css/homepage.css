@@ -27,7 +27,7 @@ body {
     font-size: medium;
     background-image: url("/static/imgs/sportsBalls.jpg");
     background-size: cover;
-    backdrop-filter: blur(5px);
+    
 }
 
 input[type="submit"] {
