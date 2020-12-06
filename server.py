@@ -44,7 +44,7 @@ def register_user():
         return redirect('/createuser')
     else:
         crud.create_user(username, password, bio, s, c)
-        flash(f'Player created! Please login')
+        flash(f'Player created! Please Login!')
         return redirect('/')
 
 @app.route('/login', methods=["POST"])

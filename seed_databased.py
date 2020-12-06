@@ -53,10 +53,18 @@ def load_test():
         city = crud.get_city_by_id(randint(1,len(sports)))
         crud.create_user(username, password, bio, sport, city)
 
-    team1 = crud.create_team('Killers', 'Play to win',crud.get_user_by_id(1), crud.get_sport_by_id(1), crud.get_city_by_id(1))
-    team2 = crud.create_team('Wombats', 'Best D, greatest offense', crud.get_user_by_id(4),crud.get_sport_by_id(2), crud.get_city_by_id(2))
-    team3 = crud.create_team('Aggies', 'Farm for Fun', crud.get_user_by_id(5),crud.get_sport_by_id(3), crud.get_city_by_id(3))
-    
+    crud.create_team('Killers', 'Play to win',crud.get_user_by_id(1), crud.get_sport_by_id(1), crud.get_city_by_id(1))
+    crud.create_team('Wombats', 'Best D, greatest offense', crud.get_user_by_id(4),crud.get_sport_by_id(2), crud.get_city_by_id(2))
+    crud.create_team('Aggies', 'Farm for Fun', crud.get_user_by_id(5),crud.get_sport_by_id(3), crud.get_city_by_id(3))
+    crud.create_team('Cougars', 'Come play on Saturdays!', crud.get_user_by_id(7),crud.get_sport_by_id(1), crud.get_city_by_id(2))
+    crud.create_team('Wolves', 'Play ball with me on Tuesday nights!', crud.get_user_by_id(10),crud.get_sport_by_id(2), crud.get_city_by_id(1))
+    crud.create_team('Sharks', 'Speedsters! Playing every weekend!', crud.get_user_by_id(20),crud.get_sport_by_id(3), crud.get_city_by_id(3))
+    crud.create_team('Banana Slugs', 'Play to win',crud.get_user_by_id(1), crud.get_sport_by_id(1), crud.get_city_by_id(1))
+    crud.create_team('Peach Eaters', 'Best D, greatest offense', crud.get_user_by_id(4),crud.get_sport_by_id(2), crud.get_city_by_id(2))
+    crud.create_team('Cat Lovers', 'Farm for Fun', crud.get_user_by_id(5),crud.get_sport_by_id(3), crud.get_city_by_id(3))
+    crud.create_team('Shark Eaters', 'Come play on Saturdays!', crud.get_user_by_id(7),crud.get_sport_by_id(1), crud.get_city_by_id(2))
+    crud.create_team('Speedsters', 'Play ball with me on Tuesday nights!', crud.get_user_by_id(10),crud.get_sport_by_id(2), crud.get_city_by_id(1))
+    crud.create_team('Croissant Eaters', 'Speedsters! Playing every weekend!', crud.get_user_by_id(20),crud.get_sport_by_id(3), crud.get_city_by_id(3))
     for num in range(40):
         phone=fake.phone_number()
         sport = crud.get_sport_by_id(randint(1,len(sports)))

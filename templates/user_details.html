@@ -1,24 +1,60 @@
 {% extends 'base.html' %}
 {% block title %}User: {{user_profile.username}}{% endblock %}
 
-{% block head %}<i class="fas fa-portrait"></i>User:{% endblock %}
+{% block head %}<i class="fas fa-portrait"></i> User details
+<style>
+    h1{
+      margin-top: 1%;
+      color: white;
+    }
+    body{
+        font-size: medium;
+        background-image: url("/static/imgs/sportsBalls.jpg");
+        text-align: center;
+        font-family: Helvetica;
+        backdrop-filter: blur(5px);
+    }
+    .user{
+        background-color:white;
+        background: rgba(255,255,255,0.9);
+        margin-left: 35%;
+        margin-right: 35%;
+        margin-top: 3%; 
+        padding-top: 1%;
+        padding-bottom: 1%;
+        padding-left:5%;
+        text-align: left;
+        font-size: medium;
+    }
+    ul{
+        text-align: left;
+    }
+    
+</style>
+{% endblock %}
 
   {% block body %}
-          <h2>{{user_profile.username}}</h2><br>
-         <h4><i class="fas fa-futbol"></i> My Sport: <br>
-            {{user_profile.sport.sport_name}}</h4>
-          <h4><i class="fas fa-map-marker-alt"></i> My city:  <br>
-            {{user_profile.city.city_name}}</h4> 
-            <h4><i class="fas fa-user-circle"></i> About me: <br>
-            {{user_profile.bio}} </h4>
-        {% if shared_teams %}
-            {% for player in players %}
-            <div>
-                <ul><i class="fas fa-volleyball-ball"></i>Team: {{player.team.team_name}} 
-                    <ul><i class="fas fa-comment"></i> {{player.phone}} </ul>
-                </ul>
-            </div>
-            {% endfor %}
-        {% endif %}
+    <div class="user">
+        <label><h5><i class="far fa-address-card"></i> Username:</h5></label>
+        {{user_profile.username}}<br><br>
+         <label><h5><i class="fas fa-futbol"></i> Sport:</h5></label>
+            {{user_profile.sport.sport_name}}<br><br>
+        <label><h5><i class="fas fa-map-marker-alt"></i> City: </h5></label>
+            {{user_profile.city.city_name}}<br><br>
+        <label><h5><i class="fas fa-user-circle"></i> About me: </h5></label>
+            {{user_profile.bio}}<br><br>
+        
+        <div>
+            <label><h5>My Teams:</h5></label>
+            {% if shared_teams %}
+                {% for player in players %}
+                    <ul><i class="fas fa-volleyball-ball"></i>{{player.team.team_name}} 
+                        <ul><i class="fas fa-comment"></i> {{player.phone}} </ul>
+                    </ul>
+            
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
   
   {% endblock %}
