@@ -61,7 +61,7 @@ def login():
     elif users_login.password == password:
         session['current_user'] = users_login.user_id
         flash(f'Nice to see you back, {users_login.username}!')
-        return redirect('/nav')
+        return redirect(f"/users/{session['current_user']}")
     else:
         flash(f'The password you inputed for {users_login.username} is incorrect. Try again!')
         return redirect('/')
@@ -202,7 +202,8 @@ def add_player():
         current_player = crud.get_player_by_user_team(user,team)
         crud.remove_player(current_player)
         new_player = user.username
-
+    # new_player = crud.create_team_player(phone, user, team) 
+    # new_player = new_player.user.username
     return jsonify(new_player, user_id, x)
 
 

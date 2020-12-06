@@ -12,6 +12,7 @@ body{
     background-image: url("/static/imgs/sportsBalls.jpg");
     text-align: center;
     font-family: Helvetica;
+    backdrop-filter: blur(5px);
 }
 div{
     background-color: white;
@@ -22,6 +23,7 @@ div{
     padding-bottom: 2%;
     margin-bottom: 10%;
     font-size: 16px;
+    background: rgba(255,255,255,0.9);
 }
 select{
     font-size: 16px;
