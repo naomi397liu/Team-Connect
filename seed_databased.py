@@ -43,7 +43,7 @@ def load_test():
     bio = 'Test user created for testing'
     crud.create_user(username, password, bio, crud.get_sport_by_id(2), crud.get_city_by_id(3))
     # model.User(username=username, password=password, bio=bio, sport=sport, city=city)
-    for num in range(22):
+    for num in range(40):
         username=fake.first_name()
         while crud.get_user_by_username(username) != None:
             username = fake.first_name()
@@ -53,33 +53,16 @@ def load_test():
         city = crud.get_city_by_id(randint(1,len(sports)))
         crud.create_user(username, password, bio, sport, city)
 
-
-
-
-    fake = Faker()
-    a = fake.phone_number()
-    b = fake.phone_number()
-    c = fake.phone_number()
-    d = fake.phone_number()
-    e = fake.phone_number()
-    f = fake.phone_number()
-
-    #unsed variables for testing in the console
-
     team1 = crud.create_team('Killers', 'Play to win',crud.get_user_by_id(1), crud.get_sport_by_id(1), crud.get_city_by_id(1))
-    # player1 = crud.create_team_player(a, crud.get_user_by_id(1), crud.get_team_by_id(1))
-    player2 = crud.create_team_player(b, crud.get_user_by_id(3), crud.get_team_by_id(1))
-    # player3 = crud.create_team_player(c, crud.get_user_by_id(2), crud.get_team_by_id(1))
-    #won't create a duplicate team player
-    # player4 = crud.create_team_player(d, crud.get_user_by_id(1), crud.get_team_by_id(1))
-
     team2 = crud.create_team('Wombats', 'Best D, greatest offense', crud.get_user_by_id(4),crud.get_sport_by_id(2), crud.get_city_by_id(2))
-    player5 = crud.create_team_player(a, crud.get_user_by_id(1), crud.get_team_by_id(2))
-    player6 = crud.create_team_player(e, crud.get_user_by_id(4), crud.get_team_by_id(2))
-
-
     team3 = crud.create_team('Aggies', 'Farm for Fun', crud.get_user_by_id(5),crud.get_sport_by_id(3), crud.get_city_by_id(3))
-    player7 = crud.create_team_player(f, crud.get_user_by_id(5), crud.get_team_by_id(3))
+    
+    for num in range(40):
+        phone=fake.phone_number()
+        sport = crud.get_sport_by_id(randint(1,len(sports)))
+        city = crud.get_city_by_id(randint(1,len(sports)))
+        crud.create_team_player(phone, crud.get_user_by_id(num), crud.get_team_by_id(randint(1,len(crud.get_teams()))))
+    
     return
 
 #can either load in test seed data in the games database or call the function to just load
