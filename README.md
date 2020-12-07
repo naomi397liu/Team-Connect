@@ -1,11 +1,12 @@
-# Pick Up
+# Team Connect
 
 ### Technologies required:
 
-- Ajax
+- AJAX
 - SQL Alchemy
 - Jinja
 - Flask
+- Bootstrap
 
 ### Data
 
@@ -13,12 +14,12 @@
 
 - A user contains data on what their sport of interest is and their city
 - A team contains data on their sport, city and team captain AKA the creator of the team 
-- A player contains data on who the user is and what team they are a player of and phone number they can be contacted at.
+- A player creates a many to many relationship through a linked table between teams and users
 
 ### Roadmap 
 
 - [x] Allow users to create profiles in order to be linked up with others that share their location and sports interest(MVP)
-- [x] Allow users to create teams
+- [x] Allow users to create teams that are added to the database
 - [x] Allow users to join teams
 - [x] Allow users to leave teams
 - [x] Allow teammates to see each other's phone numbers to contact one another
