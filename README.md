@@ -29,7 +29,7 @@ Team Connect is an application that unites users with the same athletic interest
 ### Start By Creating An Account
 To participate, an individual must first become a user by creating a account. Their username must be unique. They can input a password, preferred sport and location. They can also include a blurb describing themselves as a player but it is limited to 50 characters. 
 
-<iframe src="https://giphy.com/embed/P6YNDwhjvZo3XR1tXV" width="480" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+<iframe src="https://giphy.com/embed/P6YNDwhjvZo3XR1tXV" allowFullScreen></iframe>
 <!-- <p><a href="https://giphy.com/gifs/P6YNDwhjvZo3XR1tXV">via GIPHY</a></p> -->
 
 
