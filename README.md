@@ -4,8 +4,6 @@
     
 </h1>
 
-![Team Connect](/static/imgs/reLogo.png)
-
 Team Connect is an application that unites users with the same athletic interest and who live in the same city, so that they can connect with one another to play casually. If a user has an athletic interest such as soccer, it allows the user to find others near by who would also like to play soccer. They can choose to be on the same team or play against each other. 
 
 ## Contents:
