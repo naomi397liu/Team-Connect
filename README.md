@@ -1,5 +1,6 @@
 # Team Connect
 
+![](/static/imgs/redLogo)
 ### Technologies required:
 
 - AJAX
