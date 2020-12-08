@@ -1,13 +1,37 @@
-# Team Connect
 
-![](/static/imgs/redLogo)
-### Technologies required:
+<h1 align="center">
+    <img width=50% alt="redLogo" src="https://user-images.githubusercontent.com/71605433/101545930-d946c380-395c-11eb-8705-89f501c1a69a.png">
+    
+</h1>
 
+![Team Connect](/static/imgs/reLogo.png)
+
+Team Connect is an application that unites users with the same athletic interest and who live in the same city, so that they can connect with one another to play casually. If a user has an athletic interest such as soccer, it allows the user to find others near by who would also like to play soccer. They can choose to be on the same team or play against each other. 
+
+## Contents:
+* [Tech Stack](#tech-stack)
+* [Features](#features)
+* [Future Features](#future)
+
+## <a name="tech-stack"></a>Technologies
+- Python
+- JavaScript
 - AJAX
 - SQL Alchemy
+- PostgreSQL
 - Jinja
 - Flask
+- jQuery
+- HTML
+- CSS
 - Bootstrap
+
+## <a name="features"></a>Features
+
+### Start By Creating An Account
+To participate, an individual must first become a user by creating a account. Their username must be unique. They can input a password, preferred sport and location. They can also include a blurb describing themselves as a player but it is limited to 50 characters. 
+
+<iframe src="https://giphy.com/embed/P6YNDwhjvZo3XR1tXV" width="480" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/P6YNDwhjvZo3XR1tXV">via GIPHY</a></p>
 
 ### Data
 
