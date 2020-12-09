@@ -1,14 +1,8 @@
 
-<<<<<<< HEAD
 <h1 align="center">
     <img width=50% alt="redLogo" src="https://user-images.githubusercontent.com/71605433/101545930-d946c380-395c-11eb-8705-89f501c1a69a.png">
     
 </h1>
-=======
-![](/static/imgs/redLogo)
-
-### Technologies required:
->>>>>>> 5a2b8cc481819fbd56b5b3ff1267033a05f2d465
 
 Team Connect is an application that unites users with the same athletic interest and who live in the same city, so that they can connect with one another to play casually. If a user has an athletic interest such as soccer, it allows the user to find others near by who would also like to play soccer. They can choose to be on the same team or play against each other. 
 
