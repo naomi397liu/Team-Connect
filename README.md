@@ -29,9 +29,14 @@ Team Connect is an application that unites users with the same athletic interest
 ### Start By Creating An Account
 To participate, an individual must first become a user by creating a account. Their username must be unique. They can input a password, preferred sport and location. They can also include a blurb describing themselves as a player but it is limited to 50 characters. 
 
-<!-- <iframe src="https://giphy.com/embed/P6YNDwhjvZo3XR1tXV" allowFullScreen></iframe> -->
-<!-- <p><a href="https://giphy.com/gifs/P6YNDwhjvZo3XR1tXV">via GIPHY</a></p> -->
+<iframe src="https://giphy.com/embed/P6YNDwhjvZo3XR1tXV" width="480" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/P6YNDwhjvZo3XR1tXV">via GIPHY</a></p>
 
+### Views
+Once a user logs in, their profile pops up. They can also view all the users and all teams. They can also view potential teammates who share their sport and city. Potential teams are also teams that share the users sport and city. To see more details, a user can click on another user to view their profile. They can also click on a team to view more details about that team.
+<iframe src="https://giphy.com/embed/7TptAgICyQMn7KsI8q" width="480" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/7TptAgICyQMn7KsI8q">via GIPHY</a></p>
+
+### Creating a Team
+A user can create a team, making them the team captain. They must input a unique team name. Their phone number is displayed to all the users in order to arrange games against other teams through the captain. 
 
 ### Data
 
