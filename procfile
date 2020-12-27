@@ -1,2 +1,1 @@
-
-web: gunicorn PickUpBall:app
+web: gunicorn server:app
