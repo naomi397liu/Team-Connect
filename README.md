@@ -6,8 +6,7 @@
 
 Team Connect is an application that unites users with the same athletic interest and who live in the same city, so that they can connect with one another to play casually. If a user has an athletic interest such as soccer, it allows the user to find others near by who would also like to play soccer. They can choose to be on the same team or play against each other. 
 
-Visit the site here:
-<a href="https://team-connect.herokuapp.com/" target="_blank">team-connect</a>
+Coming soon .... Deployed web app link
 
 # Contents:
 * [Tech Stack](#tech-stack)

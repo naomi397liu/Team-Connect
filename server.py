@@ -4,9 +4,13 @@ from flask import Flask, request, render_template, flash, redirect, session, jso
 import crud
 from jinja2 import StrictUndefined
 from model import connect_to_db
+import sys
+import logging
 # from seed_databased import load_test
 
 app = Flask(__name__)
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 app.secret_key = "ABC"
 app.jinja_env.undefined = StrictUndefined
 
