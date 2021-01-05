@@ -208,5 +208,5 @@ def add_player():
 
 
 if __name__ == "__main__":
-    # connect_to_db(app)
+    connect_to_db(app)
     app.run(debug=True, host='0.0.0.0')
