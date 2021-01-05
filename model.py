@@ -104,6 +104,7 @@ def connect_to_db(flask_app, db_uri='postgresql:///games', echo=True):
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
-    # db.create_all()
+    db.drop_all()
+    db.create_all()
 
 
