@@ -207,5 +207,5 @@ def add_player():
     return jsonify(new_player, user_id, x)
 
 
-connect_to_db(app)
+# connect_to_db(app)
 app.run(host='0.0.0.0')

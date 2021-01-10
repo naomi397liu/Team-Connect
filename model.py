@@ -94,6 +94,7 @@ def connect_to_db(flask_app, db_uri='postgresql:///games', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    flask_app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
     db.app = flask_app #connects db to server
     db.init_app(flask_app) #initalize with flask app
