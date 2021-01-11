@@ -4,11 +4,13 @@ from flask import Flask, request, render_template, flash, redirect, session, jso
 import crud
 from jinja2 import StrictUndefined
 from model import connect_to_db
+from flask_heroku import Heroku
 import sys
 import logging
 # from seed_databased import load_test
 
 app = Flask(__name__)
+heroku = Heroku(app)
 app.logger.addHandler(logging.StreamHandler(sys.stdout))
 app.logger.setLevel(logging.ERROR)
 app.secret_key = "ABC"
