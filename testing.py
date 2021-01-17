@@ -21,7 +21,7 @@ class TestPostRequests(unittest.TestCase):
         self.client = app.test_client()
 
         # Connect to test database
-        connect_to_db(app, db_uri="postgresql:///games")
+        connect_to_db(app)
         db.drop_all()
         db.create_all()
         load_test()
