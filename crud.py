@@ -174,6 +174,6 @@ def is_new_player(user, team):
         return True
         
 
-# if __name__ == '__main__':
-#     from server import app
-#     connect_to_db(app)
+if __name__ == '__main__':
+    from server import app
+    connect_to_db(app)

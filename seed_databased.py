@@ -9,11 +9,11 @@ import crud
 from model import db, connect_to_db
 import server
 
-# os.system('dropdb games')
-# os.system('createdb games')
+os.system('dropdb games')
+os.system('createdb games')
 
 connect_to_db(server.app)
-# db.drop_all()
+db.drop_all()
 db.create_all()
 
 

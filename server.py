@@ -16,7 +16,7 @@ app.logger.setLevel(logging.ERROR)
 app.secret_key = "ABC"
 app.jinja_env.undefined = StrictUndefined
 
-# load_test()
+load_test()
 
 #ROUTES ORGANIZED IN ORDER OF MOST LIKELY NAVIGATION ROUTE OF A NEW USER
 @app.route('/')
