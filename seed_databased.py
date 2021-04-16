@@ -36,7 +36,7 @@ def load_test():
     sports = load_required()[0]
     num=0
     fake = Faker()
-    username = 'test_user1'
+    username = 'fuck you'
     password = 'test_pass1'
     sport = 'Soccer'
     city = 'San Francisco'

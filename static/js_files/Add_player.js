@@ -25,3 +25,4 @@ const alertFunction = (evt) => {
 }
 
 $('#add').submit(alertFunction)
+
