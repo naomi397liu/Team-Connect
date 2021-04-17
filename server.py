@@ -18,10 +18,29 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def root():
-    """Show homepage template."""
+    """Show react template."""
     return render_template('react.html')
 
+@app.route('/login', methods=["POST"])
+def login():
+    """Allow user to login """
+    login_info = request.get_json() #list with username and password
+    username = login_info['username']
+    password = login_info['password']
+    users_login = crud.get_user_by_username(username)
+    
+    if users_login == None:
+        #flash(f'Looks like you have not made an account yet!')
+        return jsonify('does not exist')
+    elif users_login.password == password:
+        #session['current_user'] = users_login.user_id
+        #flash(f'Nice to see you back, {users_login.username}!')
+        return jsonify(users_login.user_id)
+    else:
+        #flash(f'The password you inputed for {users_login.username} is incorrect. Try again!')
+        return jsonify('incorrect password')
 
+# @app.route('/open_create_user')
 
 if __name__ == "__main__":
     connect_to_db(app)
