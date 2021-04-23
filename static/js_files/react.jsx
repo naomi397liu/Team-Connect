@@ -1,14 +1,20 @@
+// const { string } = require("prop-types");
+
 const Router = ReactRouterDOM.BrowserRouter;
 const { useHistory, useParams, Redirect, Switch, Prompt, Link, Route } = ReactRouterDOM;
 
 function Homepage() {
-
+    const history = useHistory();
     const [username, setUsername] = React.useState('') 
     const [password, setPassword] = React.useState('')
-
+    function checkData(data){
+        if (typeof(data) == "number"){
+            history.push("/users")
+        }
+    }
     function login(event){
-        
         event.preventDefault()
+        
         let data = {username: username, password: password}; //key is the STR username and value is the value of username
         fetch(`/login`, {
                 headers: {
@@ -18,7 +24,9 @@ function Homepage() {
                 body: JSON.stringify(data)
             })
             .then(res => res.json())
-            .then(data => console.log(data));
+            .then(data => {
+                checkData(data)
+                console.log(data)});
         
     }
  
@@ -42,16 +50,32 @@ function Homepage() {
         </div>
     );
 }
+// data is state
+//wrap fetch in use effect
 function Users(){
-    // history.pushState("/users")
+    const history = useHistory();
+    // const [users, setUsers] = useState('')
+    
+    // useEffect(() => {fetch(`/users`, {
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         method: 'GET',
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(data)});
+    // }, []);
     return (
         <React.Fragment>
             <h1>All Users</h1>
             <p>Search through users by name, sport or location</p>
-            {/* <button onClick={() => history.push("/teams")}>Users Page</button> */}
+            <button onClick={() => history.push("/teams")}>Teams Page</button>
+
         </React.Fragment>
     );
 }
+
 function Teams(){
     return (
         <React.Fragment>

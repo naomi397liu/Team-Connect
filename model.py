@@ -90,7 +90,7 @@ class Player(db.Model):
     def __repr__(self):
         return f'<Player player_id={self.player_id} user={self.user.username} team={self.team.team_name}>'
 #database name = games, called with psql
-def connect_to_db(flask_app, db_uri='postgres://yucpqokrcaiepe:5446752aedfb8829222b3f136c08dda397e9146093fea58c28d5f673058c8fa4@ec2-54-156-85-145.compute-1.amazonaws.com:5432/dd17anf51gtb4f'):
+def connect_to_db(flask_app, db_uri='postgresql:///games'):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     flask_app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False

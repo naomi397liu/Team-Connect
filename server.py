@@ -30,17 +30,17 @@ def login():
     users_login = crud.get_user_by_username(username)
     
     if users_login == None:
-        #flash(f'Looks like you have not made an account yet!')
         return jsonify('does not exist')
     elif users_login.password == password:
-        #session['current_user'] = users_login.user_id
-        #flash(f'Nice to see you back, {users_login.username}!')
         return jsonify(users_login.user_id)
     else:
-        #flash(f'The password you inputed for {users_login.username} is incorrect. Try again!')
         return jsonify('incorrect password')
 
-# @app.route('/open_create_user')
+@app.route('/users', methods=["GET"])
+def users():
+    """returns all users"""
+    users = crud.get_users()
+    return jsonify(users)
 
 if __name__ == "__main__":
     connect_to_db(app)
